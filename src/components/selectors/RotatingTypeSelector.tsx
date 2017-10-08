@@ -1,16 +1,13 @@
 import * as React from 'react';
+import { RotatingType } from '../../Constants';
 
 export interface RotatingTypeSelectorProps {
   onSetRotating(isRotating: boolean): void
+  defaultType: RotatingType
 }
 
 interface RotatingTypeSelectorState {
   isRotating: RotatingType
-}
-
-enum RotatingType {
-  NOT_ROTATING = "0",
-  ROTATING = "1"
 }
 
 export default class RotatingTypeSelector extends React.Component<RotatingTypeSelectorProps, RotatingTypeSelectorState> {
@@ -20,6 +17,14 @@ export default class RotatingTypeSelector extends React.Component<RotatingTypeSe
       isRotating: RotatingType.NOT_ROTATING
     }
   }
+
+  componentDidMount() {
+    this.setState({
+      ...this.state,
+      isRotating: this.props.defaultType
+    })
+  }
+
   onSetSpecial(event) {
     let rotatingType = event.target.value
 

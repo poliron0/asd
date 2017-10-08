@@ -1,23 +1,29 @@
 import * as React from 'react';
 
+import { SpecialType } from '../../Constants';
+
 export interface SpecialTypeSelectorProps {
     onSetSpecial(isSpecial: boolean): void
+    defaultType: SpecialType
 }
 
 interface SpecialTypeSelectorState {
     isSpecial: SpecialType
 }
 
-enum SpecialType {
-    NOT_SPECIAL = "0",
-    SPECIAL = "1"
-}
 export default class SpecialTypeSelector extends React.Component<SpecialTypeSelectorProps, SpecialTypeSelectorState> {
     constructor() {
         super()
         this.state = {
             isSpecial: SpecialType.NOT_SPECIAL
         }
+    }
+
+    componentDidMount() {
+        this.setState({
+            ...this.state,
+            isSpecial: this.props.defaultType
+        })
     }
     onSetSpecial(event) {
         let specialType = event.target.value
