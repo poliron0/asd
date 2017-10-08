@@ -1,3 +1,6 @@
+import RotatingTypeSelector from '../components/selectors/RotatingTypeSelector';
+import SpecialTypeSelector from '../components/selectors/SpecialTypeSelector';
+import { } from '../components/selectors/SpecialLineSelector';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
@@ -20,27 +23,30 @@ export default class MainContainer extends React.Component<MainContainerProps, M
   }
 
   render() {
-    
+
+    const regexList = <RegexListContainer regexList={logStore.log.regexList} />
+    const specialTypeSelector = <SpecialTypeSelector
+      onSetSpecial={(isSpecialLine: boolean) => {
+        logStore.log.isSpecialLine = isSpecialLine
+      }} />
+
+    const rotatingTypeSelector = <RotatingTypeSelector
+      onSetRotating={(isRotating: boolean) => {
+        logStore.log.isRotating = isRotating
+      }} />
 
     return (
       <div>
-        <form>
-          Does the log contain special line?
-          <br />
-          <input type="radio" name="isSpecialLineLog" /> yes
-          <input type="radio" name="isSpecialLineLog" /> no
-          <br />
-          Is the log rotating?
-          <br />
-          <input type="radio" name="isRotatingLog" /> yes
-          <input type="radio" name="isRotatingLog" /> no
-        </form>
+        Does the log contain special line?
+          {specialTypeSelector}
+        Is the log rotating?
+          {rotatingTypeSelector}
         name: <input type="text" />
         <br />
         location: <input type="text" />
         <br />
         Regular expressions:
-        <RegexListContainer regexList={logStore.log.regexList}/>
+        {regexList}
       </div >
     );
 

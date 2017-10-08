@@ -31,7 +31,6 @@ interface LogDetails {
 
 export class LogFactory {
     static generateLogFromDetails(logDetails: LogDetails): Log {
-        console.log("Generating from: ", logDetails)
         let log: Log = new Log(logDetails._name, logDetails._location)
         log.isRotating = logDetails._isRotating
         log.isSpecialLine = logDetails._isSpecialLine
