@@ -10,8 +10,7 @@ class LogStore {
 
     constructor() {
         //Retrieve last saved log from local storage
-        let lastSavedLog = JSON.parse(JSON.parse(localStorage.getItem(localStorageKey)))
-        console.log(lastSavedLog)
+        let lastSavedLog = JSON.parse(localStorage.getItem(localStorageKey))
         if(!lastSavedLog) {
             this._log = defaultLog
         } else {
@@ -31,8 +30,7 @@ class LogStore {
 
     saveLog() {
         //Save the updated log to local storage
-        localStorage.setItem(localStorageKey, JSON.stringify(JSON.stringify(this._log)))
-        console.log(localStorage.getItem(localStorageKey))
+        localStorage.setItem(localStorageKey, JSON.stringify(this._log))
     }
 }
 

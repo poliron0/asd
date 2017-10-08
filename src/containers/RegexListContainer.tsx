@@ -25,6 +25,10 @@ export default class RegexListContainer extends React.Component<RegexListContain
         })
     }
 
+    onRemoveRegex(id: string) {
+        this.props.regexList.filter(regex => regex.id != id)
+    }
+
     onAddRegex(regex: LogRegex) {
         this.props.regexList.unshift(regex)
     }
@@ -39,6 +43,8 @@ export default class RegexListContainer extends React.Component<RegexListContain
         const inputs = this.props.regexList.map(logRegex =>
             <RegexInput
                 key={logRegex.id}
+                defaultString={logRegex.exp}
+                onRemoveRegex={() => this.onRemoveRegex(logRegex.id)}
                 onChangeRegexString={(regexString: string) => this.onChangeRegexString(logRegex.id, regexString)} />
         )
 

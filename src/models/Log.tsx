@@ -4,9 +4,9 @@ export class LogRegex {
     @observable private _exp: string
     @observable private _id: string
 
-    constructor(exp: string) {
+    constructor(exp: string, id: string = Math.random().toString()) {
         this._exp = exp
-        this._id = Math.random().toString()
+        this._id = id
     }
 
     @computed get exp() {
@@ -16,17 +16,26 @@ export class LogRegex {
     @computed get id() {
         return this._id
     }
+
     setExp(exp: string) {
         this._exp = exp
     }
+
+    setId(id: string) {
+        this._id = id
+    }
 }
 
+interface LogRegexDetails {
+    _id: string 
+    _exp: string
+}
 interface LogDetails {
     _name: string
     _location: string
     _isRotating: boolean
     _isSpecialLine: boolean
-    _regexList: Array<string>
+    _regexList: Array<LogRegexDetails>
 }
 
 export class LogFactory {
@@ -34,7 +43,9 @@ export class LogFactory {
         let log: Log = new Log(logDetails._name, logDetails._location)
         log.isRotating = logDetails._isRotating
         log.isSpecialLine = logDetails._isSpecialLine
-        log.regexList = logDetails._regexList.map(regexString => new LogRegex(regexString))
+        log.regexList = logDetails._regexList.map(regex => 
+            new LogRegex(regex._exp, regex._id)
+        )
 
         return log
     }
@@ -94,5 +105,5 @@ export class Log {
     set regexList(regexList: Array<LogRegex>) {
         this._regexList = regexList
     }
-    
+
 }
