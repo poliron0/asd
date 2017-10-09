@@ -25,7 +25,7 @@ export default class RotatingTypeSelector extends React.Component<RotatingTypeSe
     })
   }
 
-  onSetSpecial(event) {
+  onSetRotating(event) {
     let rotatingType = event.target.value
 
     switch (rotatingType) {
@@ -47,7 +47,7 @@ export default class RotatingTypeSelector extends React.Component<RotatingTypeSe
   render() {
     return (
       <div>
-        <form onChange={this.onSetSpecial.bind(this)}>
+        <form onChange={this.onSetRotating.bind(this)}>
           <input type="radio"
             value={RotatingType.NOT_ROTATING}
             name="isRotatingLog"

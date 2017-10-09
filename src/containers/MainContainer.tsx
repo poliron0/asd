@@ -1,13 +1,13 @@
-import RotatingTypeSelector from '../components/selectors/RotatingTypeSelector';
-import SpecialTypeSelector from '../components/selectors/SpecialTypeSelector';
-import { } from '../components/selectors/SpecialLineSelector';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
-import { Log } from '../models/Log';
+import LocationInput from '../components/inputs/LocationInput';
+import NameInput from '../components/inputs/NameInput';
+import RotatingTypeSelector from '../components/selectors/RotatingTypeSelector';
+import SpecialTypeSelector from '../components/selectors/SpecialTypeSelector';
+import { RotatingType, SpecialType } from '../Constants';
 import { logStore } from '../stores/LogStore';
 import RegexListContainer from './RegexListContainer';
-import { SpecialType, RotatingType } from '../Constants';
 
 export interface MainContainerProps {
 }
@@ -25,16 +25,30 @@ export default class MainContainer extends React.Component<MainContainerProps, M
   render() {
 
     const regexList = <RegexListContainer regexList={logStore.log.regexList} />
+
     const specialTypeSelector = <SpecialTypeSelector
-      defaultType = {logStore.log.isSpecialLine ? SpecialType.SPECIAL : SpecialType.NOT_SPECIAL}
+      defaultType={logStore.log.isSpecialLine ? SpecialType.SPECIAL : SpecialType.NOT_SPECIAL}
       onSetSpecial={(isSpecialLine: boolean) => {
         logStore.log.isSpecialLine = isSpecialLine
       }} />
 
     const rotatingTypeSelector = <RotatingTypeSelector
-      defaultType = {logStore.log.isRotating ?  RotatingType.ROTATING : RotatingType.NOT_ROTATING}
+      defaultType={logStore.log.isRotating ? RotatingType.ROTATING : RotatingType.NOT_ROTATING}
       onSetRotating={(isRotating: boolean) => {
         logStore.log.isRotating = isRotating
+      }} />
+
+
+    const nameInput = <NameInput
+      defaultName={logStore.log.name}
+      onSetName={(name: string) => {
+        logStore.log.name = name
+      }} />
+
+    const locationInput = <LocationInput
+      defaultLocation={logStore.log.location}
+      onSetLocation={(location: string) => {
+        logStore.log.location = location
       }} />
 
     return (
@@ -43,9 +57,9 @@ export default class MainContainer extends React.Component<MainContainerProps, M
           {specialTypeSelector}
         Is the log rotating?
           {rotatingTypeSelector}
-        name: <input type="text" />
+        Name: {nameInput}
         <br />
-        location: <input type="text" />
+        Location: {locationInput}
         <br />
         Regular expressions:
         {regexList}
