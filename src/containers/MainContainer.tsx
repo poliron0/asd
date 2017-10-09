@@ -1,11 +1,9 @@
-import { } from '../components/cards/LogCard';
+import LogCardContainer from './LogCardContainer';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
 import LogFormContainer from './LogFormContainer';
-import { logStore } from '../stores/LogStore';
-import LogCard from '../components/cards/LogCard';
-import LogCardContainer from './LogCardContainer';
+import { viewStore } from '../stores/ViewStore';
 
 export interface MainContainerProps {
 }
@@ -21,9 +19,12 @@ export default class MainContainer extends React.Component<MainContainerProps, M
   }
 
   render() {
+
     return (
-      // <LogFormContainer />
-      <LogCardContainer />
+      <div>
+        {viewStore.isEditMode ? <LogFormContainer />: <LogCardContainer />}
+        {/* <LogFormContainer /> */}
+      </div>
     );
 
   }

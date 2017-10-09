@@ -8,6 +8,7 @@ import SpecialTypeSelector from '../components/selectors/SpecialTypeSelector';
 import { RotatingType, SpecialType } from '../Constants';
 import RegexListContainer from './RegexListContainer';
 import { logStore } from '../stores/LogStore';
+import { viewStore } from '../stores/ViewStore';
 
 export interface LogFormContainerProps {
 }
@@ -45,7 +46,7 @@ export default class LogFormContainer extends React.Component<LogFormContainerPr
             onSetLocation={(location: string) => {
                 logStore.log.location = location
             }} />
-            
+
         return (
             <div>
                 Does the log contain special line?
@@ -59,6 +60,10 @@ export default class LogFormContainer extends React.Component<LogFormContainerPr
                 Regular expressions:
                 {regexList}
                 <button onClick={() => logStore.saveLog()}>save</button>
+                <button onClick={() => {
+                    logStore.saveLog()
+                    viewStore.isEditMode = false
+                }}>Save and close</button>
             </div>
         );
     }

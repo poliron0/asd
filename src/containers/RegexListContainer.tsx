@@ -38,7 +38,7 @@ export default class RegexListContainer extends React.Component<RegexListContain
 
         const addButton =
             <button onClick={(event) => this.onAddRegex(new LogRegex(''))}>
-                Add
+                Add regular expression
             </button>
 
         const inputs = this.props.regexList.getAll().map(logRegex =>
