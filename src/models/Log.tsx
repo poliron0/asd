@@ -1,6 +1,7 @@
 import { Skip, Type } from 'serializer.ts/Decorators';
 import { computed, observable } from 'mobx';
 import { LogRegex } from './LogRegex';
+import { RegexList } from './RegexList';
 
 export class Log {
     @observable protected _name: string
@@ -10,15 +11,15 @@ export class Log {
 
     //Decorator for serializer - just specify 
     //Array type
-    @Type(() => LogRegex)
-    @observable protected _regexList: Array<LogRegex>
+    @Type(() => RegexList)
+    @observable protected _regexList: RegexList
 
     constructor(name: string, location: string) {
         this._name = name
         this._location = location
         this._isRotating = false
         this._isSpecialLine = false
-        this._regexList = []
+        this._regexList = new RegexList()
     }
 
     //decorator for skipping getters 
@@ -44,7 +45,7 @@ export class Log {
     }
 
     @Skip()
-    get regexList(): Array<LogRegex> {
+    get regexList(): RegexList {
         return this._regexList
     }
 
@@ -64,7 +65,7 @@ export class Log {
         this._isSpecialLine = isSpecialLine
     }
 
-    set regexList(regexList: Array<LogRegex>) {
+    set regexList(regexList: RegexList) {
         this._regexList = regexList
     }
 

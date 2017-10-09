@@ -11,6 +11,12 @@ interface RegexInputState {
 }
 
 export default class RegexInput extends React.Component<RegexInputProps, RegexInputState> {
+    
+    onRemoveRegex() {
+        console.log('here')
+        this.props.onRemoveRegex()
+    }
+
     onChangeRegexString(event) {
         const regexString = event.target.value
         this.props.onChangeRegexString(regexString)
@@ -40,6 +46,7 @@ export default class RegexInput extends React.Component<RegexInputProps, RegexIn
                     type="text"
                     onChange={this.onChangeRegexString.bind(this)} 
                     value={this.state.regexString} />
+                <button onClick={this.onRemoveRegex.bind(this)}>Remove</button>
             </div>
         );
     }

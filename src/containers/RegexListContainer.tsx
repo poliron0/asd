@@ -3,9 +3,10 @@ import * as React from 'react';
 
 import RegexInput from '../components/inputs/RegexInput';
 import { LogRegex } from '../models/LogRegex';
+import { RegexList } from '../models/RegexList';
 
 export interface RegexListContainerProps {
-    regexList: Array<LogRegex>
+    regexList: RegexList
 }
 
 interface RegexListContainerState {
@@ -16,7 +17,7 @@ interface RegexListContainerState {
 export default class RegexListContainer extends React.Component<RegexListContainerProps, RegexListContainerState> {
 
     onChangeRegexString(id: string, regexString: string) {
-        this.props.regexList.map(regex => {
+        this.props.regexList.getAll().map(regex => {
             if (regex.id === id) {
                 regex.setExp(regexString)
             }
@@ -26,11 +27,11 @@ export default class RegexListContainer extends React.Component<RegexListContain
     }
 
     onRemoveRegex(id: string) {
-        this.props.regexList.filter(regex => regex.id != id)
+        this.props.regexList.remove(id)
     }
 
     onAddRegex(regex: LogRegex) {
-        this.props.regexList.unshift(regex)
+        this.props.regexList.add(regex)
     }
 
     render() {
@@ -40,7 +41,7 @@ export default class RegexListContainer extends React.Component<RegexListContain
                 Add
             </button>
 
-        const inputs = this.props.regexList.map(logRegex =>
+        const inputs = this.props.regexList.getAll().map(logRegex =>
             <RegexInput
                 key={logRegex.id}
                 defaultString={logRegex.exp}
