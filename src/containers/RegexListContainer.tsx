@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
-import RegexInput from '../components/RegexInput';
-import { LogRegex } from '../models/Log';
+import RegexInput from '../components/inputs/RegexInput';
+import { LogRegex } from '../models/LogRegex';
 
 export interface RegexListContainerProps {
     regexList: Array<LogRegex>

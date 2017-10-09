@@ -1,43 +1,6 @@
 import { Skip, Type } from 'serializer.ts/Decorators';
 import { computed, observable } from 'mobx';
-
-export class LogRegex {
-    @observable private _exp: string
-    @observable private _id: string
-
-    constructor(exp: string, id: string = Math.random().toString()) {
-        this._exp = exp
-        this._id = id
-    }
-
-    @computed get exp() {
-        return this._exp
-    }
-
-    @computed get id() {
-        return this._id
-    }
-
-    setExp(exp: string) {
-        this._exp = exp
-    }
-
-    setId(id: string) {
-        this._id = id
-    }
-}
-
-interface LogRegexDetails {
-    _id: string 
-    _exp: string
-}
-interface LogDetails {
-    _name: string
-    _location: string
-    _isRotating: boolean
-    _isSpecialLine: boolean
-    _regexList: Array<LogRegexDetails>
-}
+import { LogRegex } from './LogRegex';
 
 export class Log {
     @observable protected _name: string
