@@ -1,6 +1,7 @@
 import { computed, observable } from 'mobx';
+import { deserialize, serialize } from 'serializer.ts/Serializer';
 
-import { Log, LogFactory } from '../models/Log';
+import { Log } from '../models/Log';
 
 const defaultLog = new Log('default', 'c:/')
 const localStorageKey = 'log'
@@ -14,7 +15,7 @@ class LogStore {
         if(!lastSavedLog) {
             this._log = defaultLog
         } else {
-            this._log = LogFactory.generateLogFromDetails(lastSavedLog)
+            this._log = deserialize<Log>(Log, lastSavedLog)
         }
     }
 
@@ -30,7 +31,9 @@ class LogStore {
 
     saveLog() {
         //Save the updated log to local storage
-        localStorage.setItem(localStorageKey, JSON.stringify(this._log))
+        const seralizedLog = JSON.stringify(serialize(this._log))
+        localStorage.setItem(localStorageKey, seralizedLog)
+
     }
 }
 
