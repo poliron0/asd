@@ -3,7 +3,7 @@ import { deserialize, serialize } from 'serializer.ts/Serializer';
 
 import { Log } from '../models/Log';
 
-const defaultLog = new Log('', 'c:/')
+const defaultLog = new Log('defaultName', 'c:/')
 const localStorageKey = 'log'
 
 class LogStore {

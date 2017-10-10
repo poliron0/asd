@@ -23,7 +23,6 @@ export default class MainContainer extends React.Component<MainContainerProps, M
     return (
       <div>
         {viewStore.isEditMode ? <LogFormContainer />: <LogCardContainer />}
-        {/* <LogFormContainer /> */}
       </div>
     );
 
