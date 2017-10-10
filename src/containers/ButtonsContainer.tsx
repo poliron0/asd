@@ -20,7 +20,7 @@ export default class ButtonsContainer extends React.Component<ButtonsContainerPr
         return (
             <div>
                 <button
-                    onClick={() => logStore.saveLog()}
+                    onClick={() => {logStore.saveLog()}}
                     disabled={!isFormValid}>
                     Save
                 </button>

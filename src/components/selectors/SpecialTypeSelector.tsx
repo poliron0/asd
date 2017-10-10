@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { SpecialType } from '../../Constants';
+import { SpecialType } from '../../auxiliary/Enums';
 
 export interface SpecialTypeSelectorProps {
     onSetSpecial(isSpecial: boolean): void

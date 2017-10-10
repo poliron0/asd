@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import { logStore } from '../stores/LogStore';
 import { viewStore } from '../stores/ViewStore';
-import { isLocationValid, isNameValid } from '../Validators';
+import { isLocationValid, isNameValid } from '../auxiliary/Validators';
 import InputsContainer from './InputsContainer';
 import RegexListContainer from './RegexListContainer';
 import SelectorsContainer from './SelectorsContainer';

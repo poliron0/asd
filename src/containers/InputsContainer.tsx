@@ -6,7 +6,7 @@ import LocationInput from '../components/inputs/LocationInput';
 import NameInput from '../components/inputs/NameInput';
 import { logFormStore } from '../stores/LogFormStore';
 import { logStore } from '../stores/LogStore';
-import { isLocationValid, isNameValid } from '../Validators';
+import { isLocationValid, isNameValid } from '../auxiliary/Validators';
 
 export interface InputsContainerProps {
 }

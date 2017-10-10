@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RotatingType } from '../../Constants';
+import { RotatingType } from '../../auxiliary/Enums';
 
 export interface RotatingTypeSelectorProps {
   onSetRotating(isRotating: boolean): void
