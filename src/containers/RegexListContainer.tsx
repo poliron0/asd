@@ -51,6 +51,7 @@ export default class RegexListContainer extends React.Component<RegexListContain
 
         return (
             <div>
+                Regular expressions:
                 {addButton}
                 {inputs}
             </div>
