@@ -23,13 +23,13 @@ export default class LogCard extends React.Component<LogCardProps, LogCardState>
 
         return (
             <div>
-                <b>Name:</b> {log.name}
-                <br />
-                <b>Location:</b> {log.location}
-                <br />
                 <b>Does the log contain a special line?</b> {log.isSpecialLine ? 'yes' : 'no'}
                 <br />
                 <b>Is is a rotating log:</b> {log.isRotating ? 'yes' : 'no'}
+                <br />
+                <b>Name:</b> {log.name}
+                <br />
+                <b>Location:</b> {log.location}
                 <br />
                 <b>Regular expressions to capture:</b> {regularExpressionsList}
 
