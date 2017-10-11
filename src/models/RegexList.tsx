@@ -2,6 +2,7 @@ import { observable } from 'mobx';
 import { Type } from 'serializer.ts/Decorators';
 
 import { LogRegex } from './LogRegex';
+import { LogRegexId } from '../auxiliary/Types';
 
 export class RegexList {
 
@@ -12,7 +13,7 @@ export class RegexList {
         this._list = []
     }
 
-    remove(id: string) {
+    remove(id: LogRegexId) {
         this._list = this._list.filter(logRegex => logRegex.id != id)
     }
 

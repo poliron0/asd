@@ -2,11 +2,12 @@ import { logStore } from './LogStore';
 import { isLocationValid, isRegexValid } from '../auxiliary/Validators';
 import { computed, observable } from 'mobx';
 import { RegexList } from '../models/RegexList';
+import { LogRegexId } from '../auxiliary/Types';
 
 class LogFormStore {
     @observable private _isNameValid: boolean = true
     @observable private _isLocationValid: boolean = true
-    @observable private _isRegexValid: Map<string, boolean> = new Map<string, boolean>()
+    @observable private _isRegexValid: Map<LogRegexId, boolean> = new Map<LogRegexId, boolean>()
     
     constructor() {
         logStore.log.regexList.getAll().forEach(logRegex => {
@@ -14,11 +15,11 @@ class LogFormStore {
         })
     }
 
-    isRegexValid(id: string): boolean {
+    isRegexValid(id: LogRegexId): boolean {
         return this._isRegexValid.get(id)
     }
 
-    setRegexValid(id: string, isValid: boolean) {
+    setRegexValid(id: LogRegexId, isValid: boolean) {
         this._isRegexValid.set(id, isValid)
         console.log(JSON.stringify(this._isRegexValid))
     }
@@ -29,7 +30,7 @@ class LogFormStore {
         }
     }
 
-    removeRegex(id: string) {
+    removeRegex(id: LogRegexId) {
         this._isRegexValid.delete(id)
     }
 

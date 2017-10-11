@@ -13,7 +13,6 @@ interface RegexInputState {
 export default class RegexInput extends React.Component<RegexInputProps, RegexInputState> {
     
     onRemoveRegex() {
-        console.log('here')
         this.props.onRemoveRegex()
     }
 

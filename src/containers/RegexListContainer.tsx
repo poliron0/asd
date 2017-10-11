@@ -7,6 +7,7 @@ import { RegexList } from '../models/RegexList';
 import InputError from '../components/inputs/InputError';
 import { logFormStore } from '../stores/LogFormStore';
 import { isRegexValid } from '../auxiliary/Validators';
+import { LogRegexId } from '../auxiliary/Types';
 
 export interface RegexListContainerProps {
     regexList: RegexList
@@ -18,8 +19,8 @@ interface RegexListContainerState {
 
 @observer
 export default class RegexListContainer extends React.Component<RegexListContainerProps, RegexListContainerState> {
-    
-    onChangeRegexString(id: string, regexString: string) {
+
+    onChangeRegexString(id: LogRegexId, regexString: string) {
         logFormStore.setRegexValid(id, isRegexValid(regexString))
         this.props.regexList.getAll().map(regex => {
             if (regex.id === id) {
@@ -30,7 +31,7 @@ export default class RegexListContainer extends React.Component<RegexListContain
         })
     }
 
-    onRemoveRegex(id: string) {
+    onRemoveRegex(id: LogRegexId) {
         logFormStore.removeRegex(id)
         this.props.regexList.remove(id)
     }
@@ -40,13 +41,6 @@ export default class RegexListContainer extends React.Component<RegexListContain
         this.props.regexList.add(regex)
     }
 
-    // componentWillUnmount() {
-    //     //When component is destroyed we 
-    //     //Should set all regex fields to valid, since one can't save 
-    //     //invalid regex anyway. That way the user won't see irrelevent
-    //     //Error message next to the regex fieldsafter refreshing the page
-    //     logFormStore.setAllValid()
-    // }
     render() {
 
         const addButton =
@@ -54,13 +48,17 @@ export default class RegexListContainer extends React.Component<RegexListContain
                 Add regular expression
             </button>
 
+        const errorOrNothing = (logRegexId: LogRegexId) =>
+            logFormStore.isRegexValid(logRegexId) ? '' :
+                <InputError errorMessage={'Please enter a valid javascript regex!'} />
+
         const inputs = this.props.regexList.getAll().map(logRegex =>
             <span key={logRegex.id}>
-                <RegexInput 
+                <RegexInput
                     defaultString={logRegex.exp}
                     onRemoveRegex={() => this.onRemoveRegex(logRegex.id)}
                     onChangeRegexString={(regexString: string) => this.onChangeRegexString(logRegex.id, regexString)} />
-                {logFormStore.isRegexValid(logRegex.id) ? '' : <InputError errorMessage={'Please enter a valid javascript regex!'} />}
+                {errorOrNothing(logRegex.id)}
             </span>
         )
 
