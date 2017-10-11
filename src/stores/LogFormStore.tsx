@@ -21,7 +21,6 @@ class LogFormStore {
 
     setRegexValid(id: LogRegexId, isValid: boolean) {
         this._isRegexValid.set(id, isValid)
-        console.log(JSON.stringify(this._isRegexValid))
     }
 
     setAllValid() {
