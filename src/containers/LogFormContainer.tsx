@@ -12,18 +12,13 @@ export interface LogFormContainerProps {
 }
 
 interface LogFormContainerState {
-    isNameValid: boolean
-    isLocationValid: boolean
+
 }
 
 @observer
 export default class LogFormContainer extends React.Component<LogFormContainerProps, LogFormContainerState> {
     constructor() {
         super()
-        this.state = {
-            isNameValid: true,
-            isLocationValid: true
-        }
     }
 
     render() {
