@@ -1,10 +1,10 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
-import { Paths } from '../auxiliary/Enums';
-import LogCard from '../components/cards/LogCard';
-import { logStore } from '../stores/LogStore';
-import { routerStore } from '../stores/RouterStore';
+import { Paths } from '../../auxiliary/Enums';
+import LogCard from '../../components/cards/LogCard';
+import { logStore } from '../../stores/LogStore';
+import { routerStore } from '../../stores/RouterStore';
 
 export interface LogCardContainerProps {
 }

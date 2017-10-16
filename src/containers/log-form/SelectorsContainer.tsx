@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import RotatingTypeSelector from '../components/selectors/RotatingTypeSelector';
-import SpecialTypeSelector from '../components/selectors/SpecialTypeSelector';
-import { RotatingType, SpecialType } from '../auxiliary/Enums';
-import { logStore } from '../stores/LogStore';
+import RotatingTypeSelector from '../../components/selectors/RotatingTypeSelector';
+import SpecialTypeSelector from '../../components/selectors/SpecialTypeSelector';
+import { RotatingType, SpecialType } from '../../auxiliary/Enums';
+import { logStore } from '../../stores/LogStore';
 
 export interface SelectorsContainerProps {
 }

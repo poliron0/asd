@@ -3,8 +3,8 @@ import * as React from 'react';
 
 import { Paths } from '../auxiliary/Enums';
 import { routerStore } from '../stores/RouterStore';
-import LogCardContainer from './LogCardContainer';
-import LogFormContainer from './LogFormContainer';
+import LogCardContainer from './log-card/LogCardContainer';
+import LogFormContainer from './log-form/LogFormContainer';
 
 export interface MainContainerProps {
 }
@@ -25,10 +25,10 @@ export default class MainContainer extends React.Component<MainContainerProps, M
         return <LogCardContainer />
       case (Paths.EDIT):
         return <LogFormContainer />
-      case(Paths.VIEW):
-        return <LogCardContainer/>
+      case (Paths.VIEW):
+        return <LogCardContainer />
       default:
-        return <LogCardContainer/>
+        return <LogCardContainer />
     }
   }
 }

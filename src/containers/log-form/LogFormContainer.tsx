@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
-import { isLocationValid, isNameValid } from '../auxiliary/Validators';
-import { logStore } from '../stores/LogStore';
+import { isLocationValid, isNameValid } from '../../auxiliary/Validators';
+import { logStore } from '../../stores/LogStore';
 import ButtonsContainer from './ButtonsContainer';
 import InputsContainer from './InputsContainer';
 import RegexListContainer from './RegexListContainer';
