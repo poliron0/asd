@@ -5,17 +5,18 @@ import MainContainer from './containers/MainContainer';
 
 
 const AppRouter = () => (
-  <Router>
-    <div>
-      <ul>
-        <li><Link to="/">Main</Link></li>
-      </ul>
+  <MainContainer/>
+  // <Router>
+  //   <div>
+  //     <ul>
+  //       <li><Link to="/">Main</Link></li>
+  //     </ul>
 
-      <hr/>
+  //     <hr/>
 
-      <Route exact path="/" component={MainContainer}/>
-    </div>
-  </Router>
+  //     <Route exact path="/" component={MainContainer}/>
+  //   </div>
+  // </Router>
 )
 
 export default AppRouter

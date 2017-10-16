@@ -1,9 +1,10 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
+import { Paths } from '../auxiliary/Enums';
 import LogCard from '../components/cards/LogCard';
 import { logStore } from '../stores/LogStore';
-import { viewStore } from '../stores/ViewStore';
+import { routerStore } from '../stores/RouterStore';
 
 export interface LogCardContainerProps {
 }
@@ -15,7 +16,7 @@ interface LogCardContainerState {
 @observer
 export default class LogCardContainer extends React.Component<LogCardContainerProps, LogCardContainerState> {
     setEditMode() {
-        viewStore.isEditMode = true
+        routerStore.goTo(Paths.EDIT)
     }
 
     render() {

@@ -1,9 +1,10 @@
-import LogCardContainer from './LogCardContainer';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
+import { Paths } from '../auxiliary/Enums';
+import { routerStore } from '../stores/RouterStore';
+import LogCardContainer from './LogCardContainer';
 import LogFormContainer from './LogFormContainer';
-import { viewStore } from '../stores/ViewStore';
 
 export interface MainContainerProps {
 }
@@ -15,16 +16,19 @@ interface MainContainerState {
 export default class MainContainer extends React.Component<MainContainerProps, MainContainerState> {
 
   constructor() {
-    super();
+    super()
   }
 
   render() {
-
-    return (
-      <div>
-        {viewStore.isEditMode ? <LogFormContainer />: <LogCardContainer />}
-      </div>
-    );
-
+    switch (routerStore.location) {
+      case (Paths.MAIN):
+        return <LogCardContainer />
+      case (Paths.EDIT):
+        return <LogFormContainer />
+      case(Paths.VIEW):
+        return <LogCardContainer/>
+      default:
+        return <LogCardContainer/>
+    }
   }
 }

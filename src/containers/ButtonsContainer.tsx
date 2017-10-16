@@ -1,9 +1,10 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
+import { Paths } from '../auxiliary/Enums';
 import { logFormStore } from '../stores/LogFormStore';
 import { logStore } from '../stores/LogStore';
-import { viewStore } from '../stores/ViewStore';
+import { routerStore } from '../stores/RouterStore';
 
 export interface ButtonsContainerProps {
 }
@@ -27,9 +28,10 @@ export default class ButtonsContainer extends React.Component<ButtonsContainerPr
                 <button
                     onClick={() => {
                         logStore.saveLog()
-                        viewStore.isEditMode = false
+                        routerStore.goTo(Paths.VIEW)
                     }}
-                    disabled={!isFormValid}>
+                    disabled={!isFormValid}
+                    >
                     Save and close
                 </button>
             </div>

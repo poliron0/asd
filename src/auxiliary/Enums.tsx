@@ -18,3 +18,9 @@ export enum RotatingType {
     NOT_ROTATING = "0",
     ROTATING = "1"
 }
+
+export enum Paths {
+    MAIN = '/',
+    VIEW = '/view',
+    EDIT = '/edit'
+}
