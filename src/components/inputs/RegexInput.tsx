@@ -39,14 +39,13 @@ export default class RegexInput extends React.Component<RegexInputProps, RegexIn
     }
     render() {
         return (
-            <div>
-                Expression: 
+            <li>
                 <input
                     type="text"
                     onChange={this.onChangeRegexString.bind(this)} 
                     value={this.state.regexString} />
-                <button onClick={this.onRemoveRegex.bind(this)}>Remove</button>
-            </div>
+                {' '} <button onClick={this.onRemoveRegex.bind(this)}>Remove regex</button>
+            </li>
         );
     }
 }

@@ -5,8 +5,8 @@ import { isLocationValid, isNameValid } from '../../auxiliary/Validators';
 import { logStore } from '../../stores/LogStore';
 import ButtonsContainer from './ButtonsContainer';
 import InputsContainer from './InputsContainer';
-import RegexListContainer from './RegexListContainer';
 import SelectorsContainer from './SelectorsContainer';
+import RegexListContainer from './RegexListContainer';
 
 export interface LogFormContainerProps {
 }

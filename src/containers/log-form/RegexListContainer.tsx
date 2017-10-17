@@ -1,13 +1,14 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
+import { LogRegexId } from '../../auxiliary/Types';
+import { isRegexValid } from '../../auxiliary/Validators';
+import InputError from '../../components/inputs/InputError';
 import RegexInput from '../../components/inputs/RegexInput';
+import RegexTester from '../../components/inputs/RegexTester';
 import { LogRegex } from '../../models/LogRegex';
 import { RegexList } from '../../models/RegexList';
-import InputError from '../../components/inputs/InputError';
 import { logFormStore } from '../../stores/LogFormStore';
-import { isRegexValid } from '../../auxiliary/Validators';
-import { LogRegexId } from '../../auxiliary/Types';
 
 export interface RegexListContainerProps {
     regexList: RegexList
@@ -48,9 +49,7 @@ export default class RegexListContainer extends React.Component<RegexListContain
                 Add regular expression
             </button>
 
-        const errorOrNothing = (logRegexId: LogRegexId) =>
-            logFormStore.isRegexValid(logRegexId) ? '' :
-                <InputError errorMessage={'Please enter a valid javascript regex!'} />
+        const inputError = <InputError errorMessage={'Please enter a valid javascript regex!'} />
 
         const inputs = this.props.regexList.getAll().map(logRegex =>
             <span key={logRegex.id}>
@@ -58,13 +57,13 @@ export default class RegexListContainer extends React.Component<RegexListContain
                     defaultString={logRegex.exp}
                     onRemoveRegex={() => this.onRemoveRegex(logRegex.id)}
                     onChangeRegexString={(regexString: string) => this.onChangeRegexString(logRegex.id, regexString)} />
-                {errorOrNothing(logRegex.id)}
+                {logFormStore.isRegexValid(logRegex.id) ? <RegexTester regexString={logRegex.exp} /> : inputError}
             </span>
         )
 
         return (
             <div>
-                Regular expressions:
+                Regular expressions:{' '}
                 {addButton}
                 {inputs}
             </div>
