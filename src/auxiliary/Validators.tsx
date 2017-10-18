@@ -1,3 +1,5 @@
+import { Log } from '../models/Log';
+import { LogRegex } from '../models/LogRegex';
 const validNameRegex: RegExp = /^[A-Za-z][A-Za-z]*$/
 const validLogLocationRegex: RegExp = /((?:[a-zA-Z]\:){0,1}(?:[\\/][\w.]+){1,})/
 
@@ -21,4 +23,9 @@ export const isRegexValid = (regexString: string) =>  {
     catch(error) {
         return false;
     }
+}
+
+export const isLogValid = (log: Log): boolean => {
+    return isNameValid(log.name) && isLocationValid(log.location)
+    && log.regexList.getAll().every((logRegex: LogRegex) => isRegexValid(logRegex.exp))
 }

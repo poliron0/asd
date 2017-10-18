@@ -8,7 +8,6 @@ import RegexInput from '../../components/inputs/RegexInput';
 import RegexTester from '../../components/inputs/RegexTester';
 import { LogRegex } from '../../models/LogRegex';
 import { RegexList } from '../../models/RegexList';
-import { logFormStore } from '../../stores/LogFormStore';
 
 export interface RegexListContainerProps {
     regexList: RegexList
@@ -22,7 +21,6 @@ interface RegexListContainerState {
 export default class RegexListContainer extends React.Component<RegexListContainerProps, RegexListContainerState> {
 
     onChangeRegexString(id: LogRegexId, regexString: string) {
-        logFormStore.setRegexValid(id, isRegexValid(regexString))
         this.props.regexList.getAll().map(regex => {
             if (regex.id === id) {
                 regex.setExp(regexString)
@@ -33,12 +31,10 @@ export default class RegexListContainer extends React.Component<RegexListContain
     }
 
     onRemoveRegex(id: LogRegexId) {
-        logFormStore.removeRegex(id)
         this.props.regexList.remove(id)
     }
 
     onAddRegex(regex: LogRegex) {
-        logFormStore.setRegexValid(regex.id, true)
         this.props.regexList.add(regex)
     }
 
@@ -57,7 +53,7 @@ export default class RegexListContainer extends React.Component<RegexListContain
                     defaultString={logRegex.exp}
                     onRemoveRegex={() => this.onRemoveRegex(logRegex.id)}
                     onChangeRegexString={(regexString: string) => this.onChangeRegexString(logRegex.id, regexString)} />
-                {logFormStore.isRegexValid(logRegex.id) ? <RegexTester regexString={logRegex.exp} /> : inputError}
+                {isRegexValid(logRegex.exp) ? <RegexTester regexString={logRegex.exp} /> : inputError}
             </div>
         )
 

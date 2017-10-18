@@ -11,12 +11,11 @@ class RouterStore {
     }
     
     @computed get location(): string {
-        // return this._history.location.pathname
         return this._location
     }
 
     @action goTo(pathName: Paths) {
-        window.location.assign(pathName)
+        window.history.pushState('','',pathName)
         this._location = pathName
     }
 

@@ -7,6 +7,7 @@ import ButtonsContainer from './ButtonsContainer';
 import InputsContainer from './InputsContainer';
 import SelectorsContainer from './SelectorsContainer';
 import RegexListContainer from './RegexListContainer';
+import { DataStatus } from '../../auxiliary/Enums';
 
 export interface LogFormContainerProps {
 }
@@ -23,6 +24,13 @@ export default class LogFormContainer extends React.Component<LogFormContainerPr
 
     render() {
 
+        switch (logStore.dataStatus) {
+            case (DataStatus.FETCH):
+                return <div>Loading...</div>
+            case(DataStatus.ERROR):
+                return <div>Error occured - please try again later</div>
+        }
+        
         const instructions =
             <div>
                 <b>Please fill out the form by the following rules:</b>

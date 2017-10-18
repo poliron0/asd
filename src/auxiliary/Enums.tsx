@@ -24,3 +24,10 @@ export enum Paths {
     VIEW = '/view',
     EDIT = '/edit'
 }
+
+export enum DataStatus {
+    FETCH,
+    UPDATE,
+    DONE,
+    ERROR
+}
