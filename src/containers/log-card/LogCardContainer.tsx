@@ -23,14 +23,14 @@ export default class LogCardContainer extends React.Component<LogCardContainerPr
         switch (logStore.dataStatus) {
             case (DataStatus.FETCH):
                 return <div>Loading...</div>
-            case (DataStatus.DONE):
+            case (DataStatus.FETCH_DONE):
                 return (
                     <div>
                         <LogCard log={logStore.log} />
                         <button onClick={this.setEditMode.bind(this)}>Press to edit</button>
                     </div>
                 )
-            case(DataStatus.ERROR):
+            case (DataStatus.FETCH_ERROR):
                 return <div>Error occured - please try again later</div>
         }
         return (

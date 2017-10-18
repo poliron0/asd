@@ -19,13 +19,13 @@ export default class SpecialTypeSelector extends React.Component<SpecialTypeSele
             <div>
                 <input type="radio"
                     name="isSpecialLineLog"
-                    checked={!this.props.isSpecial} 
-                    onChange={() => this.props.onSetSpecial(false)}/> no
+                    checked={!this.props.isSpecial}
+                    onChange={() => this.props.onSetSpecial(false)} /> no
 
                 <input type="radio"
                     name="isSpecialLineLog"
-                    checked={this.props.isSpecial} 
-                    onChange={() => this.props.onSetSpecial(true)}/> yes
+                    checked={this.props.isSpecial}
+                    onChange={() => this.props.onSetSpecial(true)} /> yes
             </div>
         );
     }

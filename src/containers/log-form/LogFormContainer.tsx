@@ -27,7 +27,7 @@ export default class LogFormContainer extends React.Component<LogFormContainerPr
         switch (logStore.dataStatus) {
             case (DataStatus.FETCH):
                 return <div>Loading...</div>
-            case(DataStatus.ERROR):
+            case(DataStatus.FETCH_ERROR):
                 return <div>Error occured - please try again later</div>
         }
         
@@ -46,6 +46,18 @@ export default class LogFormContainer extends React.Component<LogFormContainerPr
         const regexList = <RegexListContainer regexList={logStore.log.regexList} />
         const buttons = <ButtonsContainer />
 
+        let message = <span></span>
+        switch(logStore.dataStatus) {
+            case(DataStatus.UPDATE):
+                message = <b>updating</b>
+                break
+            case(DataStatus.UPDATE_ERROR):
+                message = <b>Error updaing - please try again latter</b>
+                break
+            case(DataStatus.UPDATE_DONE):
+                message = <b>Updated successfully</b>
+        }
+
         return (
             <div>
                 {instructions}
@@ -54,7 +66,7 @@ export default class LogFormContainer extends React.Component<LogFormContainerPr
                 <br />
                 {regexList}
                 {buttons}
-
+                {message}
             </div>
         );
     }

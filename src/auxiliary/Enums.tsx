@@ -12,7 +12,9 @@ export enum Paths {
 
 export enum DataStatus {
     FETCH,
+    FETCH_ERROR,
+    FETCH_DONE,
     UPDATE,
-    DONE,
-    ERROR
+    UPDATE_ERROR,
+    UPDATE_DONE
 }

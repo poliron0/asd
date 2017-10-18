@@ -3,7 +3,7 @@ import { computed, observable } from 'mobx';
 import { deserialize, serialize } from 'serializer.ts/Serializer';
 
 import { Log } from '../models/Log';
-import { fetchLog } from '../services/LogService';
+import { fetchLog, updateLog } from '../services/LogService';
 
 const localStorageKey = 'log'
 
@@ -13,14 +13,13 @@ class LogStore {
 
     constructor() {
         this._dataStatus = DataStatus.FETCH
-        console.log("constructor!")
         fetchLog()
             .then((result: Log) => {
                 this._log = result
-                this._dataStatus = DataStatus.DONE
+                this._dataStatus = DataStatus.FETCH_DONE
             })
             .catch(err => {
-                this._dataStatus = DataStatus.ERROR
+                this._dataStatus = DataStatus.FETCH_ERROR
             })
         //Retrieve last saved log from local storage
         // let lastSavedLog = JSON.parse(localStorage.getItem(localStorageKey))
@@ -41,8 +40,14 @@ class LogStore {
 
     saveLog() {
         //Save the updated log to local storage
-        const seralizedLog = JSON.stringify(serialize(this._log))
-        localStorage.setItem(localStorageKey, seralizedLog)
+        this._dataStatus = DataStatus.UPDATE
+        updateLog(this._log)
+            .then(result => {
+                this._dataStatus = DataStatus.UPDATE_DONE
+            })
+            .catch(err => {
+                this._dataStatus = DataStatus.UPDATE_ERROR
+            })
     }
 }
 
