@@ -52,13 +52,13 @@ export default class RegexListContainer extends React.Component<RegexListContain
         const inputError = <InputError errorMessage={'Please enter a valid javascript regex!'} />
 
         const inputs = this.props.regexList.getAll().map(logRegex =>
-            <span key={logRegex.id}>
+            <div key={logRegex.id}>
                 <RegexInput
                     defaultString={logRegex.exp}
                     onRemoveRegex={() => this.onRemoveRegex(logRegex.id)}
                     onChangeRegexString={(regexString: string) => this.onChangeRegexString(logRegex.id, regexString)} />
                 {logFormStore.isRegexValid(logRegex.id) ? <RegexTester regexString={logRegex.exp} /> : inputError}
-            </span>
+            </div>
         )
 
         return (

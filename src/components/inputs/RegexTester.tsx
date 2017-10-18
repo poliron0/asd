@@ -6,13 +6,15 @@ export interface RegexTesterProps {
 
 interface RegexTesterState {
     text: string
+    isOpen: boolean
 }
 
 export default class RegexTester extends React.Component<RegexTesterProps, RegexTesterState> {
     constructor() {
         super()
         this.state = {
-            text: ''
+            text: '',
+            isOpen: false
         }
     }
 
@@ -30,20 +32,35 @@ export default class RegexTester extends React.Component<RegexTesterProps, Regex
         })
     }
 
+    onChangeVisibility() {
+        this.setState({
+            ...this.state,
+            isOpen: !this.state.isOpen
+        })
+    }
     render() {
         const regex: RegExp = new RegExp(this.props.regexString)
         const isValid = regex.test(this.state.text)
+        const textBox =
+            <textarea cols={40} rows={3}
+                placeholder={'type string to test here'}
+                onChange={this.onChangeText.bind(this)}>
+            </textarea>
+
+        const isValidText = isValid ?
+            <span style={{ color: 'green' }}>Match</span> :
+            <span style={{ color: 'red' }}>No match</span>
 
         return (
             <div>
-                <textarea cols={40} rows={3}
-                    placeholder={'type string to test here'}
-                    onChange={this.onChangeText.bind(this)}>
-                </textarea>
-                <br/>
-                {isValid ?
-                    <span style={{ color: 'green' }}>Match</span> :
-                    <span style={{ color: 'red' }}>No match</span>}
+                <div>
+                    <a href='#' onClick={this.onChangeVisibility.bind(this)}>
+                        {this.state.isOpen ? 'Close tester' : 'Open tester'}
+                    </a>
+                </div>
+
+
+                {this.state.isOpen ? <span>{textBox} {isValidText}</span> : ''}
 
             </div>
         );
