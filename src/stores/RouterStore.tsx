@@ -15,7 +15,7 @@ class RouterStore {
     }
 
     @action goTo(pathName: Paths) {
-        window.history.pushState('','',pathName)
+        window.history.pushState(Math.random(),'',pathName)
         this._location = pathName
     }
 

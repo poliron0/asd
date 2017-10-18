@@ -1,8 +1,8 @@
+import { observer } from 'mobx-react';
 import * as React from 'react';
 
 import RotatingTypeSelector from '../../components/selectors/RotatingTypeSelector';
 import SpecialTypeSelector from '../../components/selectors/SpecialTypeSelector';
-import { RotatingType, SpecialType } from '../../auxiliary/Enums';
 import { logStore } from '../../stores/LogStore';
 
 export interface SelectorsContainerProps {
@@ -12,17 +12,18 @@ interface SelectorsContainerState {
 
 }
 
+@observer
 export default class SelectorsContainer extends React.Component<SelectorsContainerProps, SelectorsContainerState> {
     render() {
 
         const specialTypeSelector = <SpecialTypeSelector
-            defaultType={logStore.log.isSpecialLine ? SpecialType.SPECIAL : SpecialType.NOT_SPECIAL}
+            isSpecial={logStore.log.isSpecialLine}
             onSetSpecial={(isSpecialLine: boolean) => {
                 logStore.log.isSpecialLine = isSpecialLine
             }} />
 
         const rotatingTypeSelector = <RotatingTypeSelector
-            defaultType={logStore.log.isRotating ? RotatingType.ROTATING : RotatingType.NOT_ROTATING}
+            isRotating={logStore.log.isRotating}
             onSetRotating={(isRotating: boolean) => {
                 logStore.log.isRotating = isRotating
             }} />
