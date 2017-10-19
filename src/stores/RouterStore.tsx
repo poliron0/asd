@@ -1,7 +1,6 @@
-import { Paths } from '../auxiliary/Enums';
 import { action, computed, observable } from 'mobx';
-import createHistory from 'history/createBrowserHistory';
-import { History } from 'history'
+
+import { Paths } from '../auxiliary/Enums';
 
 class RouterStore {
     @observable private _location: string
