@@ -50,7 +50,7 @@ export default class RegexListContainer extends React.Component<RegexListContain
         const inputs = this.props.regexList.getAll().map(logRegex =>
             <div key={logRegex.id}>
                 <RegexInput
-                    defaultString={logRegex.exp}
+                    regexString={logRegex.exp}
                     onRemoveRegex={() => this.onRemoveRegex(logRegex.id)}
                     onChangeRegexString={(regexString: string) => this.onChangeRegexString(logRegex.id, regexString)} />
                 {isRegexValid(logRegex.exp) ? <RegexTester regexString={logRegex.exp} /> : inputError}

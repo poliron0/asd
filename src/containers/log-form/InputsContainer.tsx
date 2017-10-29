@@ -21,13 +21,13 @@ export default class InputsContainer extends React.Component<InputsContainerProp
 
     render() {
         const nameInput = <NameInput
-            defaultName={logStore.log.name}
+            name={logStore.log.name}
             onSetName={(name: string) => {
                 logStore.log.name = name
             }} />
 
         const locationInput = <LocationInput
-            defaultLocation={logStore.log.location}
+            location={logStore.log.location}
             onSetLocation={(location: string) => {
                 logStore.log.location = location
             }} />

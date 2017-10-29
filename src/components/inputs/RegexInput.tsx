@@ -1,13 +1,12 @@
 import * as React from 'react';
 
 export interface RegexInputProps {
-    defaultString: string
+    regexString: string
     onChangeRegexString(regexString: string): void
     onRemoveRegex(): void
 }
 
 interface RegexInputState {
-    regexString: string
 }
 
 export default class RegexInput extends React.Component<RegexInputProps, RegexInputState> {
@@ -17,33 +16,20 @@ export default class RegexInput extends React.Component<RegexInputProps, RegexIn
     }
 
     onChangeRegexString(event) {
-        const regexString = event.target.value
-        this.props.onChangeRegexString(regexString)
-        this.setState({
-            ...this.state,
-            regexString
-        })
+        this.props.onChangeRegexString(event.target.value)
     }
 
     constructor() {
         super()
-        this.state ={
-            regexString: ''
-        }
     }
-    componentDidMount() {
-        this.setState({
-            ...this.state,
-            regexString: this.props.defaultString
-        })
-    }
+
     render() {
         return (
             <li>
                 <input
                     type="text"
                     onChange={this.onChangeRegexString.bind(this)} 
-                    value={this.state.regexString} />
+                    value={this.props.regexString} />
                 {' '} <button onClick={this.onRemoveRegex.bind(this)}>Remove regex</button>
             </li>
         );
