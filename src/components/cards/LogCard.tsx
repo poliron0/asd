@@ -12,6 +12,7 @@ import TextFormat from 'material-ui-icons/TextFormat';
 
 export interface LogCardProps {
     log: Log
+    onSetEditMode()
 }
 
 interface LogCardState {
@@ -29,18 +30,16 @@ export default class LogCard extends React.Component<LogCardProps, LogCardState>
                         <ListItemIcon>
                             <TextFormat />
                         </ListItemIcon>
-                        <ListItemText primary={logRegex.exp} style={{paddingLeft: '1px'}}/>
+                        <ListItemText primary={logRegex.exp} style={{ paddingLeft: '1px' }} />
                     </ListItem>
                 )}
             </List> : <i>No regular espressions added yet!</i>
 
-
-        return (
-            <CardContent style={{paddingBottom:'1px'}}>
-
+        const cardContent =
+            <CardContent style={{ paddingBottom: '1px' }}>
                 <Typography type='headline' component='h2'>
                     Log summary
-                    </Typography>
+                </Typography>
                 <Typography type='body1'>
                     <b>Does the log contain a special line?</b> {log.isSpecialLine ? 'yes' : 'no'}
                     <br />
@@ -54,6 +53,17 @@ export default class LogCard extends React.Component<LogCardProps, LogCardState>
                 <b>Regular expressions to capture:</b> {regularExpressionsList}
             </CardContent>
 
+        const cardAction =
+            <CardActions>
+                <Button dense color='primary' onClick={this.props.onSetEditMode}>Press to edit</Button>
+            </CardActions>
+
+
+        return (
+            <Card style={{ maxWidth: 300 }}>
+                {cardContent}
+                {cardAction}
+            </Card>
         );
     }
 }

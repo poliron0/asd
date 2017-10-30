@@ -6,6 +6,8 @@ import SpecialTypeSelector from '../../components/selectors/SpecialTypeSelector'
 import { logStore } from '../../stores/LogStore';
 
 export interface SelectorsContainerProps {
+    onSetSpecialLine(boolean): void
+    onSetRotating(boolean): void
 }
 
 interface SelectorsContainerState {
@@ -18,15 +20,11 @@ export default class SelectorsContainer extends React.Component<SelectorsContain
 
         const specialTypeSelector = <SpecialTypeSelector
             isSpecial={logStore.log.isSpecialLine}
-            onSetSpecial={(isSpecialLine: boolean) => {
-                logStore.log.isSpecialLine = isSpecialLine
-            }} />
+            onSetSpecial={this.props.onSetSpecialLine} />
 
         const rotatingTypeSelector = <RotatingTypeSelector
             isRotating={logStore.log.isRotating}
-            onSetRotating={(isRotating: boolean) => {
-                logStore.log.isRotating = isRotating
-            }} />
+            onSetRotating={this.props.onSetRotating} />
 
         return (
             <span>

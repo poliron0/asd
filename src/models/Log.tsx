@@ -29,6 +29,11 @@ export class Log {
         return this._name
     }
 
+    @Skip() 
+    get id(): string {
+        return this._name
+    }
+
     @Skip()
     get location(): string {
         return this._location

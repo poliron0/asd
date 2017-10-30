@@ -4,13 +4,16 @@ import * as React from 'react';
 import { DataStatus, Paths } from '../../auxiliary/Enums';
 import { isLogValid } from '../../auxiliary/Validators';
 import SaveButton from '../../components/SaveButton';
-import { logStore } from '../../stores/LogStore';
+import { Log } from '../../models/Log';
 import { routerStore } from '../../stores/RouterStore';
 import InputsContainer from './InputsContainer';
 import RegexListContainer from './RegexListContainer';
 import SelectorsContainer from './SelectorsContainer';
 
 export interface LogFormContainerProps {
+    log: Log
+    dataStatus: DataStatus
+    onSaveLog()
 }
 
 interface LogFormContainerState {
@@ -25,7 +28,7 @@ export default class LogFormContainer extends React.Component<LogFormContainerPr
 
     render() {
 
-        switch (logStore.dataStatus) {
+        switch (this.props.dataStatus) {
             case (DataStatus.FETCH):
                 return <div>Loading...</div>
             case (DataStatus.FETCH_ERROR):
@@ -46,20 +49,28 @@ export default class LogFormContainer extends React.Component<LogFormContainerPr
                 routerStore.goTo(Paths.VIEW)
             }}>Back to Summary</a>
 
-        const selectors = <SelectorsContainer />
+        const selectors = <SelectorsContainer
+            onSetSpecialLine={(isSpecialLine: boolean) => {
+                this.props.log.isSpecialLine = isSpecialLine
+            }}
+
+            onSetRotating={(isRotating) => {
+                this.props.log.isRotating = isRotating
+            }}
+        />
 
         const inputs = <InputsContainer />
 
         const regexList = <RegexListContainer
-            regexList={logStore.log.regexList} />
+            regexList={this.props.log.regexList} />
 
         const saveButton =
             <SaveButton
-                disabled={!isLogValid(logStore.log)}
-                onSave={() => logStore.saveLog()} />
+                disabled={!isLogValid(this.props.log)}
+                onSave={() => this.props.onSaveLog()} />
 
         let message = <span></span>
-        switch (logStore.dataStatus) {
+        switch (this.props.dataStatus) {
             case (DataStatus.UPDATE):
                 message = <b>Updating</b>
                 break
