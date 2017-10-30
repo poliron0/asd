@@ -1,18 +1,17 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
-import { DataStatus, Paths } from '../../auxiliary/Enums';
+import { Paths } from '../../auxiliary/Enums';
 import { isLogValid } from '../../auxiliary/Validators';
 import SaveButton from '../../components/SaveButton';
 import { Log } from '../../models/Log';
+import { logStore } from '../../stores/LogStore';
 import { routerStore } from '../../stores/RouterStore';
 import InputsContainer from './InputsContainer';
 import RegexListContainer from './RegexListContainer';
 import SelectorsContainer from './SelectorsContainer';
 
 export interface LogFormContainerProps {
-    log: Log
-    dataStatus: DataStatus
     onSaveLog()
 }
 
@@ -28,12 +27,7 @@ export default class LogFormContainer extends React.Component<LogFormContainerPr
 
     render() {
 
-        switch (this.props.dataStatus) {
-            case (DataStatus.FETCH):
-                return <div>Loading...</div>
-            case (DataStatus.FETCH_ERROR):
-                return <div>Error occured - please try again later</div>
-        }
+        let log: Log  = logStore.logList.getAll()[0]
 
         const instructions =
             <div>
@@ -49,38 +43,42 @@ export default class LogFormContainer extends React.Component<LogFormContainerPr
                 routerStore.goTo(Paths.VIEW)
             }}>Back to Summary</a>
 
+
         const selectors = <SelectorsContainer
+            log={log}
             onSetSpecialLine={(isSpecialLine: boolean) => {
-                this.props.log.isSpecialLine = isSpecialLine
+                log.isSpecialLine = isSpecialLine
             }}
 
             onSetRotating={(isRotating) => {
-                this.props.log.isRotating = isRotating
+                log.isRotating = isRotating
             }}
         />
 
-        const inputs = <InputsContainer />
+        const inputs = <InputsContainer
+            log={log}
+        />
 
         const regexList = <RegexListContainer
-            regexList={this.props.log.regexList} />
+            regexList={log.regexList} />
 
         const saveButton =
             <SaveButton
-                disabled={!isLogValid(this.props.log)}
+                disabled={!isLogValid(log)}
                 onSave={() => this.props.onSaveLog()} />
 
         let message = <span></span>
-        switch (this.props.dataStatus) {
-            case (DataStatus.UPDATE):
-                message = <b>Updating</b>
-                break
-            case (DataStatus.UPDATE_ERROR):
-                message = <b>Updating error occurred - please try again latter</b>
-                break
-            case (DataStatus.UPDATE_DONE):
-                message = <b>Updated successfully</b>
-                break
-        }
+        // switch (this.props.dataStatus) {
+        //     case (DataStatus.UPDATE):
+        //         message = <b>Updating</b>
+        //         break
+        //     case (DataStatus.UPDATE_ERROR):
+        //         message = <b>Updating error occurred - please try again latter</b>
+        //         break
+        //     case (DataStatus.UPDATE_DONE):
+        //         message = <b>Updated successfully</b>
+        //         break
+        // }
 
         return (
             <div>

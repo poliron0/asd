@@ -1,3 +1,4 @@
+import { Log } from '../../models/Log';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
@@ -8,6 +9,7 @@ import NameInput from '../../components/inputs/NameInput';
 import { logStore } from '../../stores/LogStore';
 
 export interface InputsContainerProps {
+    log: Log
 }
 
 interface InputsContainerState {
@@ -20,26 +22,29 @@ export default class InputsContainer extends React.Component<InputsContainerProp
     }
 
     render() {
+
+        const log = this.props.log 
+
         const nameInput = <NameInput
-            name={logStore.log.name}
+            name={log.name}
             onSetName={(name: string) => {
-                logStore.log.name = name
+                log.name = name
             }} />
 
         const locationInput = <LocationInput
-            location={logStore.log.location}
+            location={log.location}
             onSetLocation={(location: string) => {
-                logStore.log.location = location
+                log.location = location
             }} />
 
         return (
             <div>
                 Name: {nameInput}
-                {isNameValid(logStore.log.name) ? <span></span> : <InputError
+                {isNameValid(log.name) ? <span></span> : <InputError
                     errorMessage={'Invalid name - name should contain only english letters'} />}
                 <br />
                 Location: {locationInput}
-                {isLocationValid(logStore.log.location) ? <span></span> : <InputError
+                {isLocationValid(log.location) ? <span></span> : <InputError
                     errorMessage={'Please enter a valid linux or windows file path'} />}
             </div>
         );

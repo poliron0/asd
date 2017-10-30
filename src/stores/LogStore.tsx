@@ -1,21 +1,23 @@
+import { LogList } from '../models/LogList';
 import { DataStatus } from '../auxiliary/Enums';
 import { computed, observable } from 'mobx';
 import { deserialize, serialize } from 'serializer.ts/Serializer';
 
 import { Log } from '../models/Log';
 import { fetchLog, updateLog } from '../services/LogService';
+import { LogId } from '../auxiliary/Types';
 
 const localStorageKey = 'log'
 
 class LogStore {
-    @observable private _log: Log
+    @observable private _logList: LogList
     @observable private _dataStatus: DataStatus
 
     constructor() {
         this._dataStatus = DataStatus.FETCH
         fetchLog()
-            .then((result: Log) => {
-                this._log = result
+            .then((result: LogList) => {
+                this._logList = result
                 this._dataStatus = DataStatus.FETCH_DONE
             })
             .catch(err => {
@@ -24,24 +26,25 @@ class LogStore {
         //Retrieve last saved log from local storage
         // let lastSavedLog = JSON.parse(localStorage.getItem(localStorageKey))
         // if (!lastSavedLog) {
-        //     this._log = defaultLog
+        //     this._logList = defaultLog
         // } else {
-        //     this._log = deserialize<Log>(Log, lastSavedLog)
+        //     this._logList = deserialize<Log>(Log, lastSavedLog)
         // }
     }
 
-    @computed get log(): Log {
-        return this._log
+    @computed get logList(): LogList {
+        return this._logList
     }
 
     @computed get dataStatus(): DataStatus {
         return this._dataStatus
     }
 
-    saveLog() {
+    saveLog(id: LogId) {
         //Save the updated log to local storage
         this._dataStatus = DataStatus.UPDATE
-        updateLog(this._log)
+        const log: Log = this._logList.getAll().filter(log => log.id === id)[0]
+        updateLog(id, log)
             .then(result => {
                 this._dataStatus = DataStatus.UPDATE_DONE
             })

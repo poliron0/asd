@@ -2,8 +2,10 @@ import { Skip, Type } from 'serializer.ts/Decorators';
 import { computed, observable } from 'mobx';
 import { LogRegex } from './LogRegex';
 import { RegexList } from './RegexList';
+import { LogId } from '../auxiliary/Types';
 
 export class Log {
+    @observable protected _id: LogId
     @observable protected _name: string
     @observable protected _location: string
     @observable protected _isRotating: boolean
@@ -14,7 +16,8 @@ export class Log {
     @Type(() => RegexList)
     @observable protected _regexList: RegexList
 
-    constructor(name: string, location: string) {
+    constructor(name: string, location: string, id: LogId = Math.random().toString()) {
+        this._id = id
         this._name = name
         this._location = location
         this._isRotating = false
@@ -30,8 +33,8 @@ export class Log {
     }
 
     @Skip() 
-    get id(): string {
-        return this._name
+    get id(): LogId{
+        return this._id
     }
 
     @Skip()

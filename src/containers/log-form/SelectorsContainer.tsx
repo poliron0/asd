@@ -3,9 +3,10 @@ import * as React from 'react';
 
 import RotatingTypeSelector from '../../components/selectors/RotatingTypeSelector';
 import SpecialTypeSelector from '../../components/selectors/SpecialTypeSelector';
-import { logStore } from '../../stores/LogStore';
+import { Log } from '../../models/Log';
 
 export interface SelectorsContainerProps {
+    log: Log
     onSetSpecialLine(boolean): void
     onSetRotating(boolean): void
 }
@@ -17,13 +18,14 @@ interface SelectorsContainerState {
 @observer
 export default class SelectorsContainer extends React.Component<SelectorsContainerProps, SelectorsContainerState> {
     render() {
-
+        const log = this.props.log
         const specialTypeSelector = <SpecialTypeSelector
-            isSpecial={logStore.log.isSpecialLine}
+            isSpecial={log.isSpecialLine}
             onSetSpecial={this.props.onSetSpecialLine} />
 
+    
         const rotatingTypeSelector = <RotatingTypeSelector
-            isRotating={logStore.log.isRotating}
+            isRotating={log.isRotating}
             onSetRotating={this.props.onSetRotating} />
 
         return (
