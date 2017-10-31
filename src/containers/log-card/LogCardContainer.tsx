@@ -1,13 +1,14 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
+import { LogId } from '../../auxiliary/Types';
 import LogCard from '../../components/cards/LogCard';
-import { logStore } from '../../stores/LogStore';
 import { Log } from '../../models/Log';
+import { logStore } from '../../stores/LogStore';
 
 
 export interface LogCardContainerProps {
-    onSetEditMode()
+    onSetEditMode(id: LogId)
 }
 
 interface LogCardContainerState {
@@ -18,12 +19,23 @@ interface LogCardContainerState {
 export default class LogCardContainer extends React.Component<LogCardContainerProps, LogCardContainerState> {
 
     render() {
-
+        
+        const addInput = <div>
+            <button onClick={() => {
+                let log = new Log('', '/c')
+                logStore.logList.add(log)
+                this.props.onSetEditMode(log.id)
+            }}>Add new log</button>
+        </div>
+        const logList = logStore.logList.getAll().map(log => <LogCard
+            key={log.id}
+            log={log}
+            onSetEditMode={() => this.props.onSetEditMode(log.id)} />)
         return (
-            logStore.logList.getAll().map(log => <LogCard
-                key={log.id}
-                log={log}
-                onSetEditMode={this.props.onSetEditMode} />)
+            <div>
+                {addInput}
+                {logList}
+            </div>
         )
     }
 }

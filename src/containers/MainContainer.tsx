@@ -6,6 +6,7 @@ import { logStore } from '../stores/LogStore';
 import { routerStore } from '../stores/RouterStore';
 import LogCardContainer from './log-card/LogCardContainer';
 import LogFormContainer from './log-form/LogFormContainer';
+import { LogId } from '../auxiliary/Types';
 
 export interface MainContainerProps {
 }
@@ -24,7 +25,7 @@ export default class MainContainer extends React.Component<MainContainerProps, M
     switch (routerStore.location) {
       case (Paths.VIEW): case (Paths.MAIN):
         return <LogCardContainer
-          onSetEditMode={() => {
+          onSetEditMode={(id: LogId) => {
             routerStore.goTo(Paths.EDIT)
           }}
         />
