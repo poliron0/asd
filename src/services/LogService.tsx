@@ -37,20 +37,20 @@ export const updateLog = (id: LogId, log: Log): Promise<Log> => {
                 })
         }, 2000)
     })
-    // return new Promise((resolve, reject) => {
-    //     setTimeout(() => {
-    //         const seralizedLog = JSON.stringify(serialize(log))
-    //         let logList: Array<Log> = JSON.parse(localStorage.getItem(localStorageKey))
-    //         //Remove old instance of updated log
-    //         logList = logList.filter(log => log.id === id)
+}
 
-    //         //Put the new one instead
-    //         logList.unshift(log)
-
-    //         //Save the new updated list back to local storage
-    //         localStorage.setItem(localStorageKey, JSON.stringify(logList))
-    //         resolve(log)
-    //     }, 2000)
-    // })
-
+export const removeLog = (id: LogId) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            fetchLog()
+                .then(result => {
+                    let log = result.get(id)
+                    result.remove(id)
+                    const seralizedLogList = JSON.stringify(serialize(result))
+                    localStorage.setItem(localStorageKey, seralizedLogList)
+                    //Return the removed log
+                    resolve(log)
+                })
+        }, 2000)
+    })
 }

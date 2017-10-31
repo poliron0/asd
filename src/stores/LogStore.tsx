@@ -1,11 +1,10 @@
-import { LogList } from '../models/LogList';
-import { DataStatus } from '../auxiliary/Enums';
 import { computed, observable } from 'mobx';
-import { deserialize, serialize } from 'serializer.ts/Serializer';
 
-import { Log } from '../models/Log';
-import { fetchLog, updateLog } from '../services/LogService';
+import { DataStatus } from '../auxiliary/Enums';
 import { LogId } from '../auxiliary/Types';
+import { Log } from '../models/Log';
+import { LogList } from '../models/LogList';
+import { fetchLog, removeLog, updateLog } from '../services/LogService';
 
 const localStorageKey = 'log'
 
@@ -43,10 +42,23 @@ class LogStore {
     saveLog(id: LogId) {
         //Save the updated log to local storage
         this._dataStatus = DataStatus.UPDATE
-        const log: Log = this._logList.getAll().filter(log => log.id === id)[0]
+        const log: Log = this._logList.get(id)
         updateLog(id, log)
             .then(result => {
                 this._dataStatus = DataStatus.UPDATE_DONE
+            })
+            .catch(err => {
+                this._dataStatus = DataStatus.UPDATE_ERROR
+            })
+    }
+
+    removeLog(id: LogId) {
+        this._dataStatus = DataStatus.UPDATE
+        removeLog(id)
+            .then(result => {
+                this._dataStatus = DataStatus.UPDATE_DONE
+                //Remove from remote succeded - remove from local copy too
+                this._logList.remove(id)
             })
             .catch(err => {
                 this._dataStatus = DataStatus.UPDATE_ERROR

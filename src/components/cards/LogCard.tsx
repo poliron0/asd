@@ -13,6 +13,7 @@ import TextFormat from 'material-ui-icons/TextFormat';
 export interface LogCardProps {
     log: Log
     onSetEditMode()
+    onRemove()
 }
 
 interface LogCardState {
@@ -55,12 +56,17 @@ export default class LogCard extends React.Component<LogCardProps, LogCardState>
 
         const cardAction =
             <CardActions>
-                <Button dense color='primary' onClick={this.props.onSetEditMode}>Press to edit</Button>
+                <Button raised color='primary' onClick={this.props.onSetEditMode}>
+                    Edit
+                </Button>
+                <Button raised color="accent" onClick={this.props.onRemove}>
+                    Remove
+                </Button>
             </CardActions>
 
 
         return (
-            <Card style={{ maxWidth: 300 }}>
+            <Card style={{ maxWidth: 300, margin: 'auto', marginBottom: '1em' }}>
                 {cardContent}
                 {cardAction}
             </Card>

@@ -31,6 +31,7 @@ export default class LogCardContainer extends React.Component<LogCardContainerPr
         const logList = logStore.logList.getAll().map(log => <LogCard
             key={log.id}
             log={log}
+            onRemove={() => this.props.onRemoveLog(log.id)}
             onSetEditMode={() => this.props.onSetEditMode(log.id)} />)
         return (
             <div>
