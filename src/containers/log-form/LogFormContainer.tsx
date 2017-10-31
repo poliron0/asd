@@ -12,6 +12,7 @@ import RegexListContainer from './RegexListContainer';
 import SelectorsContainer from './SelectorsContainer';
 
 export interface LogFormContainerProps {
+    log: Log
     onSaveLog()
 }
 
@@ -27,7 +28,7 @@ export default class LogFormContainer extends React.Component<LogFormContainerPr
 
     render() {
 
-        let log: Log  = logStore.logList.getAll()[0]
+        let log: Log  = this.props.log
 
         const instructions =
             <div>

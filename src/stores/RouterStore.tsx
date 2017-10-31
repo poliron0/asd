@@ -13,7 +13,11 @@ class RouterStore {
         return this._location
     }
 
-    @action goTo(pathName: Paths) {
+    @computed get route(): string {
+        return '/' + ('' || this._location.split('/')[1])
+    }
+
+    @action goTo(pathName: string) {
         window.history.pushState(Math.random(), '', pathName)
         this._location = pathName
     }

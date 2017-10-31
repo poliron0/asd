@@ -8,6 +8,7 @@ import { logStore } from '../../stores/LogStore';
 
 
 export interface LogCardContainerProps {
+    onRemoveLog(id: LogId)
     onSetEditMode(id: LogId)
 }
 

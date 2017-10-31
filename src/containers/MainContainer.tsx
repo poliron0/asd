@@ -7,6 +7,7 @@ import { routerStore } from '../stores/RouterStore';
 import LogCardContainer from './log-card/LogCardContainer';
 import LogFormContainer from './log-form/LogFormContainer';
 import { LogId } from '../auxiliary/Types';
+import { Log } from '../models/Log';
 
 export interface MainContainerProps {
 }
@@ -22,17 +23,24 @@ export default class MainContainer extends React.Component<MainContainerProps, M
   }
 
   getComponentFromLocation() {
-    switch (routerStore.location) {
+    switch (routerStore.route) {
       case (Paths.VIEW): case (Paths.MAIN):
         return <LogCardContainer
+          onRemoveLog={(id: LogId)=> {
+            logStore.logList.remove(id)
+          }}
           onSetEditMode={(id: LogId) => {
-            routerStore.goTo(Paths.EDIT)
+            routerStore.goTo(Paths.EDIT + '/' + id)
           }}
         />
       case (Paths.EDIT):
+        let logId: LogId = routerStore.location.split('/')[2]
+        let log: Log = logStore.logList.get(logId)
+
         return <LogFormContainer
+          log={log}
           onSaveLog={() => {
-            logStore.saveLog(logStore.logList.getAll()[0].id)
+            logStore.saveLog(log.id)
           }}
         />
     }

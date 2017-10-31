@@ -30,6 +30,14 @@ export class LogList {
     //     }
     // }
     
+    get(id: LogId): Log {
+        let index: number = this._list.findIndex(log => log.id === id)
+        if(index < 0) {
+            throw new Error('Log with such id doesn\'t exist')
+        }
+        return this._list[index]
+    }
+
     getAll(): Array<Log>{
         return this._list
     }
