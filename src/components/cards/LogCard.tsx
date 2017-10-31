@@ -1,14 +1,13 @@
-import { Padding } from 'material-ui/Table/TableCell';
-import ListItemIcon from 'material-ui/List/ListItemIcon';
+import { Button, Card, CardActions, CardContent } from 'material-ui';
+import TextFormat from 'material-ui-icons/TextFormat';
 import List from 'material-ui/List';
 import ListItem from 'material-ui/List/ListItem';
+import ListItemIcon from 'material-ui/List/ListItemIcon';
 import ListItemText from 'material-ui/List/ListItemText';
 import Typography from 'material-ui/Typography';
 import * as React from 'react';
+
 import { Log } from '../../models/Log';
-import { LogRegex } from '../../models/LogRegex';
-import { Card, Button, CardActions, CardContent, Avatar } from 'material-ui';
-import TextFormat from 'material-ui-icons/TextFormat';
 
 export interface LogCardProps {
     log: Log
@@ -66,7 +65,7 @@ export default class LogCard extends React.Component<LogCardProps, LogCardState>
 
 
         return (
-            <Card style={{ maxWidth: 300, margin: 'auto', marginBottom: '1em' }}>
+            <Card style={{ width: 300}}>
                 {cardContent}
                 {cardAction}
             </Card>

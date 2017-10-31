@@ -1,3 +1,4 @@
+import { Button, Grid } from 'material-ui';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
@@ -20,24 +21,28 @@ interface LogCardContainerState {
 export default class LogCardContainer extends React.Component<LogCardContainerProps, LogCardContainerState> {
 
     render() {
-        
-        const addInput = <div>
-            <button onClick={() => {
-                let log = new Log('', '/c')
-                logStore.logList.add(log)
-                this.props.onSetEditMode(log.id)
-            }}>Add new log</button>
-        </div>
-        const logList = logStore.logList.getAll().map(log => <LogCard
-            key={log.id}
-            log={log}
-            onRemove={() => this.props.onRemoveLog(log.id)}
-            onSetEditMode={() => this.props.onSetEditMode(log.id)} />)
+
+        const addInput =
+            <Grid container justify="center" xs={12} style={{ marginTop: '1em' }}>
+                <Button raised color='primary' onClick={() => {
+                    let log = new Log('', '/c')
+                    logStore.logList.add(log)
+                    this.props.onSetEditMode(log.id)
+                }}>Add new log</Button>
+            </Grid>
+
+        const logList = logStore.logList.getAll().map(log => <Grid container justify="center" xs={12} style={{ marginTop: '1em' }}>
+            <LogCard
+                key={log.id}
+                log={log}
+                onRemove={() => this.props.onRemoveLog(log.id)}
+                onSetEditMode={() => this.props.onSetEditMode(log.id)} />
+        </Grid>)
         return (
-            <div>
+            <Grid>
                 {addInput}
-                {logList}
-            </div>
+                {logList }
+            </Grid>
         )
     }
 }
