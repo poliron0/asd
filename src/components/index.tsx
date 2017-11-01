@@ -4,8 +4,8 @@ import * as React from 'react';
 import { DataStatus, Paths } from '../auxiliary/Enums';
 import { logStore } from '../stores/LogStore';
 import { routerStore } from '../stores/RouterStore';
-import LogCardContainer from './log-card/LogCardContainer';
-import LogFormContainer from './log-form/LogFormContainer';
+import LogCardContainer from './log-list/index';
+import LogFormContainer from './log-form/index';
 import { LogId } from '../auxiliary/Types';
 import { Log } from '../models/Log';
 

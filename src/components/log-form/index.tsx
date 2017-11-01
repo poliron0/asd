@@ -3,13 +3,12 @@ import * as React from 'react';
 
 import { Paths } from '../../auxiliary/Enums';
 import { isLogValid } from '../../auxiliary/Validators';
-import SaveButton from '../../components/SaveButton';
 import { Log } from '../../models/Log';
-import { logStore } from '../../stores/LogStore';
 import { routerStore } from '../../stores/RouterStore';
-import InputsContainer from './InputsContainer';
-import RegexListContainer from './RegexListContainer';
-import SelectorsContainer from './SelectorsContainer';
+import InputsContainer from './inputs/index';
+import RegexListContainer from './regex-list/index';
+import SaveButton from './save-button/index';
+import SelectorsContainer from './selectors/index';
 
 export interface LogFormContainerProps {
     log: Log

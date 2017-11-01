@@ -1,13 +1,13 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
-import { LogRegexId } from '../../auxiliary/Types';
-import { isRegexValid } from '../../auxiliary/Validators';
-import InputError from '../../components/inputs/InputError';
-import RegexInput from '../../components/inputs/RegexInput';
-import RegexTester from '../../components/inputs/RegexTester';
-import { LogRegex } from '../../models/LogRegex';
-import { RegexList } from '../../models/RegexList';
+import { LogRegexId } from '../../../auxiliary/Types';
+import { isRegexValid } from '../../../auxiliary/Validators';
+import InputError from '../inputs/InputError';
+import RegexInput from '../inputs/RegexInput';
+import RegexTester from '../inputs/RegexTester';
+import { LogRegex } from '../../../models/LogRegex';
+import { RegexList } from '../../../models/RegexList';
 
 export interface RegexListContainerProps {
     regexList: RegexList

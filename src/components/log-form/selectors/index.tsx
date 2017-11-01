@@ -1,9 +1,9 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
-import RotatingTypeSelector from '../../components/selectors/RotatingTypeSelector';
-import SpecialTypeSelector from '../../components/selectors/SpecialTypeSelector';
-import { Log } from '../../models/Log';
+import RotatingTypeSelector from './RotatingTypeSelector';
+import SpecialTypeSelector from './SpecialTypeSelector';
+import { Log } from '../../../models/Log';
 
 export interface SelectorsContainerProps {
     log: Log

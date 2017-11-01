@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import * as React from 'react';
 
 import { LogId } from '../../auxiliary/Types';
-import LogCard from '../../components/cards/LogCard';
+import LogCard from './LogCard';
 import { Log } from '../../models/Log';
 import { logStore } from '../../stores/LogStore';
 
@@ -23,7 +23,7 @@ export default class LogCardContainer extends React.Component<LogCardContainerPr
     render() {
 
         const addInput =
-            <Grid container justify="center" xs={12} style={{ marginTop: '1em' }}>
+            <Grid item>
                 <Button raised color='primary' onClick={() => {
                     let log = new Log('', '/c')
                     logStore.logList.add(log)
@@ -31,17 +31,18 @@ export default class LogCardContainer extends React.Component<LogCardContainerPr
                 }}>Add new log</Button>
             </Grid>
 
-        const logList = logStore.logList.getAll().map(log => <Grid container justify="center" xs={12} style={{ marginTop: '1em' }}>
-            <LogCard
-                key={log.id}
-                log={log}
-                onRemove={() => this.props.onRemoveLog(log.id)}
-                onSetEditMode={() => this.props.onSetEditMode(log.id)} />
-        </Grid>)
+        const logList = logStore.logList.getAll().map(log =>
+            <Grid item key={log.id}>
+                <LogCard
+                    log={log}
+                    onRemove={() => this.props.onRemoveLog(log.id)}
+                    onSetEditMode={() => this.props.onSetEditMode(log.id)} />
+            </Grid>
+        )
         return (
-            <Grid>
+            <Grid container justify='center' direction='column' alignItems='center'>
                 {addInput}
-                {logList }
+                {logList}
             </Grid>
         )
     }
