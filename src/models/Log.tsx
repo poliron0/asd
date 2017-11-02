@@ -3,6 +3,7 @@ import { computed, observable } from 'mobx';
 import { LogRegex } from './LogRegex';
 import { RegexList } from './RegexList';
 import { LogId } from '../auxiliary/Types';
+import IdGenerator from '../auxiliary/IdGenerator';
 
 export class Log {
     @observable protected _id: LogId
@@ -16,7 +17,7 @@ export class Log {
     @Type(() => RegexList)
     @observable protected _regexList: RegexList
 
-    constructor(name: string, location: string, id: LogId = Math.random().toString()) {
+    constructor(name: string, location: string, id: LogId = IdGenerator.generateId()) {
         this._id = id
         this._name = name
         this._location = location
@@ -25,7 +26,7 @@ export class Log {
         this._regexList = new RegexList()
     }
 
-    //decorator for skipping getters 
+    //Decorator for skipping getters 
     //In serialization process
     @Skip()
     get name(): string {
