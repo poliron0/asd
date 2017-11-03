@@ -4,8 +4,9 @@
   "description": "Boilerplate for MobX + React project with Typescript, ES6 compilation and hot code reloading",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server -d --history-api-fallback --hot --inline --progress --colors --port 3000",
-    "build": "webpack -p --progress --colors"
+    "start": "cd client && webpack-dev-server -d --history-api-fallback --hot --inline --progress --colors --port 3000",
+    "build": "cd client && webpack -p --progress --colors",
+    "watch": "nodemon --watch server --exec ts-node ./server/app.ts"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   },
   "homepage": "http://mobxjs.github.com/mobx",
   "devDependencies": {
+    "@types/express": "^4.0.39",
     "@types/react": "^16.0.13",
     "@types/react-dom": "^16.0.1",
     "@types/webpack": "^3.0.13",
@@ -39,6 +41,7 @@
     "mobx": "^3.3.1",
     "mobx-react": "^4.3.3",
     "mobx-react-devtools": "^4.2.15",
+    "nodemon": "^1.12.1",
     "postcss": "^6.0.13",
     "postcss-browser-reporter": "^0.5.0",
     "postcss-cssnext": "^3.0.2",
@@ -51,6 +54,7 @@
     "react-hot-loader": "^3.1.1",
     "serializer.ts": "0.0.12",
     "style-loader": "^0.19.0",
+    "ts-node": "^3.3.0",
     "typescript": "^2.5.3",
     "uglifyjs-webpack-plugin": "^1.0.1",
     "url-loader": "^0.6.2",
@@ -58,5 +62,7 @@
     "webpack-dev-server": "^2.6.1",
     "webpack-hot-middleware": "^2.20.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
