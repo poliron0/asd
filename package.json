@@ -4,9 +4,12 @@
   "description": "Boilerplate for MobX + React project with Typescript, ES6 compilation and hot code reloading",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd client && webpack-dev-server -d --history-api-fallback --hot --inline --progress --colors --port 3000",
-    "build": "cd client && webpack -p --progress --colors",
-    "watch": "nodemon --watch server --exec ts-node ./server/app.ts"
+    "start:client": "cd client && webpack-dev-server -d --history-api-fallback --hot --inline --progress --colors --port 3000",
+    "build:client": "cd client && webpack -p --progress --colors",
+    "watch:client": "nodemon -e js,ts,tsx --watch client --exec npm run build:client",
+    "start:server": "ts-node ./server/app.ts",
+    "watch:server": "nodemon -e ts --watch server --exec npm run start:server",
+    "watch:all": "npm run build:client && concurrently --kill-others \"npm run watch:client\" \"npm run watch:server\""
   },
   "repository": {
     "type": "git",
@@ -31,6 +34,7 @@
     "@types/react-dom": "^16.0.1",
     "@types/webpack": "^3.0.13",
     "awesome-typescript-loader": "^3.2.3",
+    "concurrently": "^3.5.0",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.1",
     "file-loader": "^1.1.5",
