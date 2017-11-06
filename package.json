@@ -8,7 +8,7 @@
     "start:server": "ts-node ./server/app.ts",
     "build:client": "cd client && webpack --progress --colors --config webpack.dev.js",
     "build:client:prod": "cd client && webpack --progress --colors --config webpack.prod.js",
-    "watch:client": "nodemon -e js,ts,tsx --watch client --exec npm run build:client",
+    "watch:client": "cd client && webpack --watch --progress --colors --config webpack.dev.js",
     "watch:server": "nodemon -e ts --watch server --exec npm run start:server",
     "watch:all": "npm run build:client && concurrently --kill-others \"npm run watch:client\" \"npm run watch:server\""
   },
@@ -36,6 +36,7 @@
     "@types/react-dom": "^16.0.1",
     "@types/webpack": "^3.0.13",
     "awesome-typescript-loader": "^3.2.3",
+    "axios": "^0.17.0",
     "concurrently": "^3.5.0",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.1",

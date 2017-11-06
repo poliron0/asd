@@ -26,11 +26,14 @@ export default class MainContainer extends React.Component<MainContainerProps, M
     switch (routerStore.route) {
       case (Paths.VIEW): case (Paths.MAIN):
         return <LogCardContainer
-          onRemoveLog={(id: LogId)=> {
+          onRemoveLog={(id: LogId) => {
             logStore.removeLog(id)
           }}
           onSetEditMode={(id: LogId) => {
             routerStore.goTo(Paths.EDIT + '/' + id)
+          }}
+          onAddLog={() => {
+            routerStore.goTo(Paths.NEW_LOG)
           }}
         />
       case (Paths.EDIT):
@@ -39,8 +42,16 @@ export default class MainContainer extends React.Component<MainContainerProps, M
 
         return <LogFormContainer
           log={log}
-          onSaveLog={() => {
+          onSaveLog={(log: Log) => {
             logStore.saveLog(log.id)
+          }}
+        />
+      case (Paths.NEW_LOG):
+        log = new Log('default', '/default')
+        return <LogFormContainer
+          log={log}
+          onSaveLog={(log: Log) => {
+            logStore.addLog(log)
           }}
         />
     }

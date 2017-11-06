@@ -7,6 +7,7 @@ export enum ShowFilter {
 export enum Paths {
     MAIN = '/',
     VIEW = '/view',
+    NEW_LOG = '/new',
     EDIT = '/edit'
 }
 

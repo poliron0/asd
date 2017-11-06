@@ -4,7 +4,7 @@ import { DataStatus } from '../auxiliary/Enums';
 import { LogId } from '../auxiliary/Types';
 import { Log } from '../models/Log';
 import { LogList } from '../models/LogList';
-import { fetchLog, removeLog, updateLog } from '../services/LogService';
+import { addLog, fetchLog, removeLog, updateLog } from '../services/LogService';
 
 const localStorageKey = 'log'
 
@@ -37,6 +37,18 @@ class LogStore {
 
     @computed get dataStatus(): DataStatus {
         return this._dataStatus
+    }
+
+    addLog(log: Log) {
+        this._dataStatus = DataStatus.UPDATE
+        addLog(log)
+            .then(result => {
+                this._dataStatus = DataStatus.UPDATE_DONE
+                this._logList.add(result)
+            })
+            .catch(err => {
+                this._dataStatus = DataStatus.UPDATE_ERROR
+            })
     }
 
     saveLog(id: LogId) {

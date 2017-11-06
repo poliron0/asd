@@ -12,7 +12,7 @@ import SelectorsContainer from './selectors/index';
 
 export interface LogFormContainerProps {
     log: Log
-    onSaveLog()
+    onSaveLog(log: Log)
 }
 
 interface LogFormContainerState {
@@ -65,7 +65,7 @@ export default class LogFormContainer extends React.Component<LogFormContainerPr
         const saveButton =
             <SaveButton
                 disabled={!isLogValid(log)}
-                onSave={() => this.props.onSaveLog()} />
+                onSave={() => this.props.onSaveLog(log)} />
 
         let message = <span></span>
         // switch (this.props.dataStatus) {

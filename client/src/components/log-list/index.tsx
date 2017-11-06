@@ -6,11 +6,13 @@ import { LogId } from '../../auxiliary/Types';
 import LogCard from './LogCard';
 import { Log } from '../../models/Log';
 import { logStore } from '../../stores/LogStore';
+import { routerStore } from '../../stores/RouterStore';
 
 
 export interface LogCardContainerProps {
     onRemoveLog(id: LogId)
     onSetEditMode(id: LogId)
+    onAddLog()
 }
 
 interface LogCardContainerState {
@@ -25,9 +27,7 @@ export default class LogCardContainer extends React.Component<LogCardContainerPr
         const addInput =
             <Grid item>
                 <Button raised color='primary' onClick={() => {
-                    let log = new Log('', '/c')
-                    logStore.logList.add(log)
-                    this.props.onSetEditMode(log.id)
+                    this.props.onAddLog()
                 }}>Add new log</Button>
             </Grid>
 
