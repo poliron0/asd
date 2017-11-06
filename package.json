@@ -10,7 +10,7 @@
     "build:client:prod": "cd client && webpack --progress --colors --config webpack.prod.js",    
     "watch:client": "nodemon -e js,ts,tsx --watch client --exec npm run build:client",
     "watch:server": "nodemon -e ts --watch server --exec npm run start:server",
-    "watch:all": "concurrently --kill-others \"npm run watch:client\" \"npm run watch:server\""
+    "watch:all": "npm run build:client && concurrently --kill-others \"npm run watch:client\" \"npm run watch:server\""
   },
   "repository": {
     "type": "git",
