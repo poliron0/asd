@@ -21,14 +21,14 @@ export class LogList {
         this._list.unshift(log)
     }
 
-    // update(id: LogId, log: Log) { 
-    //     let index = this._list.findIndex( log => log.id == id)
-    //     if(index < 0) {
-    //         throw new Error('Log with id ' + id + ' doesn\'t exist')
-    //     } else {
-    //         this._list[index] = log
-    //     }
-    // }
+    update(id: LogId, log: Log) { 
+        let index = this._list.findIndex( log => log.id == id)
+        if(index < 0) {
+            throw new Error('Log with id ' + id + ' doesn\'t exist')
+        } else {
+            this._list[index] = log
+        }
+    }
     
     get(id: LogId): Log {
         let index: number = this._list.findIndex(log => log.id === id)

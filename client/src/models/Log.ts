@@ -58,6 +58,10 @@ export class Log {
         return this._regexList
     }
 
+    set id(id: LogId) {
+        this._id = id
+    }
+    
     set name(name: string) {
         this._name = name
     }
