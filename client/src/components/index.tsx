@@ -36,7 +36,7 @@ export default class MainContainer extends React.Component<MainContainerProps, M
             routerStore.goTo(Paths.NEW_LOG)
           }}
         />
-      case (Paths.EDIT):
+      case (Paths.EDIT): {
         let logId: LogId = routerStore.location.split('/')[2]
         let log: Log = logStore.logList.get(logId)
 
@@ -46,14 +46,16 @@ export default class MainContainer extends React.Component<MainContainerProps, M
             logStore.saveLog(log.id)
           }}
         />
-      case (Paths.NEW_LOG):
-        log = new Log('default', '/default')
+      }
+      case (Paths.NEW_LOG): {
+        let log = new Log('default', '/default')
         return <LogFormContainer
           log={log}
           onSaveLog={(log: Log) => {
             logStore.addLog(log)
           }}
         />
+      }
     }
   }
   render() {
