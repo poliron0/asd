@@ -8,9 +8,9 @@
     "start:server": "ts-node ./server/app.ts",
     "build:client": "webpack --progress --colors --config client/webpack.dev.js",
     "build:client:prod": "webpack --progress --colors --config client/webpack.prod.js",
-    "watch:client": "webpack --watch --progress --colors --config client/webpack.dev.js",
+    "watch:client": "cd client && webpack --watch --progress --colors --config webpack.dev.js",
     "watch:server": "nodemon -e ts --watch server --exec npm run start:server",
-    "watch:all": "npm run build:client && concurrently --kill-others \"npm run watch:client\" \"npm run watch:server\""
+    "watch:all": "concurrently --kill-others \"npm run watch:client\" \"npm run watch:server\""
   },
   "repository": {
     "type": "git",
@@ -59,6 +59,7 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-hot-loader": "^3.1.1",
+    "react-promise": "^2.0.0",
     "serializer.ts": "0.0.12",
     "style-loader": "^0.19.0",
     "ts-node": "^3.3.0",

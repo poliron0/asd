@@ -13,9 +13,14 @@ export const addLog = (log: Log): Promise<Log> => {
     )
 }
 
-export const fetchLog = (): Promise<LogList> => {
-    return axios.get('/api/log').then(result =>
+export const fetchAll = (): Promise<LogList> => {
+    return axios.get('/api/log').then(result => 
         deserialize<LogList>(LogList, result.data)
+    )
+}
+export const fetchLog = (id: LogId): Promise<Log> => {
+    return axios.get('/api/log/' + id).then(result =>
+        deserialize<Log>(Log, result.data)
     )
     //Simulate data fetch from server
     // return new Promise((resolve, reject) => {
@@ -31,7 +36,7 @@ export const fetchLog = (): Promise<LogList> => {
     // })
 }
 
-export const updateLog = (id: LogId, log: Log): Promise<Log> => {
+export const updateLog = (log: Log): Promise<Log> => {
 
     return axios.put('/api/log', { log: serialize(log) }).then(result =>
         deserialize<Log>(Log, result.data)

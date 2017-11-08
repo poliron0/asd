@@ -16,7 +16,7 @@ export interface LogCardProps {
 }
 
 interface LogCardState {
-
+    isRemoving: boolean
 }
 
 export default class LogCard extends React.Component<LogCardProps, LogCardState> {
