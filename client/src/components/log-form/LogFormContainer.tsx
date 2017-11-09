@@ -99,6 +99,7 @@ export default class LogFormContainer extends React.Component<LogFormContainerPr
                 <br />
                 {regexList}
                 {saveButton}
+                <br/>
                 {message}
             </div>
         );

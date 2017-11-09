@@ -32,6 +32,13 @@ export default class AsyncLogForm extends React.Component<AsyncLogFormProps, Asy
                     />
                 }
             }
+            catch={err => {
+                return <div>
+                    {err.response.data.err}
+                    <br/>
+                    <a href='/'>Go to home page</a>
+                </div >
+            }}
             pending={<div>Loading...</div>}
         />
 
