@@ -1,11 +1,12 @@
+import * as bodyParser from 'body-parser';
+import * as express from 'express';
+import * as path from 'path';
+import { deserialize, serialize } from 'serializer.ts/Serializer';
+
 import IdGenerator from '../common/auxiliary/IdGenerator';
 import { isLogValid } from '../common/auxiliary/Validators';
-import * as express from 'express';
-import * as bodyParser from 'body-parser';
-import * as path from 'path';
-import { LogList } from '../common/models/LogList';
-import { serialize, deserialize } from 'serializer.ts/Serializer';
 import { Log } from '../common/models/Log';
+import { LogList } from '../common/models/LogList';
 
 let app = express()
 const publicPath = path.join(__dirname, '../public')
@@ -24,27 +25,39 @@ app.get('/api/log', (req, res, next) => {
 })
 app.get('/api/log/:id', (req, res, next) => {
     const id = req.params.id
-    res.send(serialize(logList.get(id)))
+    try {
+        res.send(serialize(logList.get(id)))
+    } catch(err) {
+        res.status(400).send({err: err.message})
+    }
 })
 app.delete('/api/log/:id', (req, res, next) => {
     const id = req.params.id
-    let log = logList.get(id)
-    logList.remove(id)
-    res.send(serialize(log))
+    try {
+        let log = logList.get(id)
+        logList.remove(id)
+        res.send(serialize(log))
+    } catch(err) {
+        res.status(400).send({err: err.message})
+    }
 })
 app.put('/api/log', (req, res, next) => {
     const log:Log = deserialize<Log>(Log, req.body.log)
     if(!isLogValid(log)) {
-        res.send({err: 'Invalid log'})
+        res.status(400).send({err: 'Invalid log'})
     } else {
-        logList.update(log.id, log)
-        res.send(log)
+        try {
+            logList.update(log.id, log)
+            res.send(log)
+        } catch(err) {
+            res.status(400).send({err: err.message})
+        }
     }   
 })
 app.post('/api/log', (req, res, next) => {
     const log:Log = deserialize<Log>(Log, req.body.log)
     if(!isLogValid(log)) {
-        res.send({err: 'Invalid log'})
+        res.status(400).send({err: 'Invalid log'})
     } else {
         //Don't trust the client - put your own id
         log.id = IdGenerator.generateId()

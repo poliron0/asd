@@ -14,31 +14,44 @@ export class LogList {
     }
 
     remove(id: LogId) {
-        this._list = this._list.filter(log => log.id != id)
+        let index = this._list.findIndex(log => log.id == id)
+        if (index < 0) {
+            throw new Error('Log with id ' + id + ' doesn\'t exist')
+        } else {
+            let log: Log = this._list[0]
+            this._list = this._list.filter(log => log.id != id)
+            return log
+        }
     }
 
     add(log: Log) {
-        this._list.unshift(log)
+        let index = this._list.findIndex(item => item.id == log.id)
+        if (index > 0) {
+            throw new Error('Log with id ' + log.id + ' already exists')
+        } else {
+            this._list.unshift(log)
+            return log
+        }
     }
 
-    update(id: LogId, log: Log) { 
-        let index = this._list.findIndex( log => log.id == id)
-        if(index < 0) {
+    update(id: LogId, log: Log) {
+        let index = this._list.findIndex(log => log.id == id)
+        if (index < 0) {
             throw new Error('Log with id ' + id + ' doesn\'t exist')
         } else {
             this._list[index] = log
         }
     }
-    
+
     get(id: LogId): Log {
         let index: number = this._list.findIndex(log => log.id === id)
-        if(index < 0) {
-            throw new Error('Log with such id doesn\'t exist')
+        if (index < 0) {
+            throw new Error('Log with id ' + id + ' doesn\'t exist')
         }
         return this._list[index]
     }
 
-    getAll(): Array<Log>{
+    getAll(): Array<Log> {
         return this._list
     }
 }
