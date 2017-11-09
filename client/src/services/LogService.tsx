@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { deserialize, serialize } from 'serializer.ts/Serializer';
-import { Log } from '../models/Log';
-import { LogList } from '../models/LogList';
-import { LogId } from '../auxiliary/Types';
+import { Log } from '../../../common/models/Log';
+import { LogList } from '../../../common/models/LogList';
+import { LogId } from '../../../common/auxiliary/Types';
 const defaultLog = new Log('defaultName', 'c:/')
 
 const localStorageKey = 'log'

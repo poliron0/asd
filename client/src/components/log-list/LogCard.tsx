@@ -7,7 +7,7 @@ import ListItemText from 'material-ui/List/ListItemText';
 import Typography from 'material-ui/Typography';
 import * as React from 'react';
 
-import { Log } from '../../models/Log';
+import { Log } from '../../../../common/models/Log';
 
 export interface LogCardProps {
     log: Log

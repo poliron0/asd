@@ -1,9 +1,9 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
-import { Paths } from '../../auxiliary/Enums';
-import { isLogValid } from '../../auxiliary/Validators';
-import { Log } from '../../models/Log';
+import { Paths } from '../../../../common/auxiliary/Enums';
+import { isLogValid } from '../../../../common/auxiliary/Validators';
+import { Log } from '../../../../common/models/Log';
 import { routerStore } from '../../stores/RouterStore';
 import InputsContainer from './inputs/index';
 import RegexListContainer from './regex-list/index';

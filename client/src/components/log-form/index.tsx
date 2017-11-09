@@ -2,8 +2,8 @@ import { observer } from 'mobx-react';
 import * as React from 'react';
 import Async from 'react-promise';
 
-import { LogId } from '../../auxiliary/Types';
-import { Log } from '../../models/Log';
+import { LogId } from '../../../../common/auxiliary/Types';
+import { Log } from '../../../../common/models/Log';
 import { logStore } from '../../stores/LogStore';
 import LogFormContainer from './LogFormContainer';
 

@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import RotatingTypeSelector from './RotatingTypeSelector';
 import SpecialTypeSelector from './SpecialTypeSelector';
-import { Log } from '../../../models/Log';
+import { Log } from '../../../../../common/models/Log';
 
 export interface SelectorsContainerProps {
     log: Log

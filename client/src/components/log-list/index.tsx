@@ -2,12 +2,12 @@ import { observer } from 'mobx-react';
 import * as React from 'react';
 import Async from 'react-promise';
 
-import { LogId } from '../../auxiliary/Types';
-import { LogList } from '../../models/LogList';
+import { LogId } from '../../../../common/auxiliary/Types';
+import { LogList } from '../../../../common/models/LogList';
 import { logStore } from '../../stores/LogStore';
 import LogListContainer from './LogListContainer';
 import { routerStore } from '../../stores/RouterStore';
-import { Paths } from '../../auxiliary/Enums';
+import { Paths } from '../../../../common/auxiliary/Enums';
 
 
 export interface AsyncLogListProps {

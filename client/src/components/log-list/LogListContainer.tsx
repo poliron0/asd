@@ -2,9 +2,9 @@ import { Button, Grid } from 'material-ui';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
-import { LogId } from '../../auxiliary/Types';
+import { LogId } from '../../../../common/auxiliary/Types';
 import LogCard from './LogCard';
-import { Log } from '../../models/Log';
+import { Log } from '../../../../common/models/Log';
 import { logStore } from '../../stores/LogStore';
 import { routerStore } from '../../stores/RouterStore';
 

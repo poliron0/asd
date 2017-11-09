@@ -1,6 +1,6 @@
 import { action, computed, observable } from 'mobx';
 
-import { Paths } from '../auxiliary/Enums';
+import { Paths } from '../../../common/auxiliary/Enums';
 
 class RouterStore {
     @observable private _location: string

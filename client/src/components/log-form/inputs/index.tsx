@@ -1,8 +1,8 @@
-import { Log } from '../../../models/Log';
+import { Log } from '../../../../../common/models/Log';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
-import { isLocationValid, isNameValid } from '../../../auxiliary/Validators';
+import { isLocationValid, isNameValid } from '../../../../../common/auxiliary/Validators';
 import InputError from './InputError';
 import LocationInput from './LocationInput';
 import NameInput from './NameInput';

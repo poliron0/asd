@@ -1,11 +1,11 @@
-import IdGenerator from '../client/src/auxiliary/IdGenerator';
-import { isLogValid } from '../client/src/auxiliary/Validators';
+import IdGenerator from '../common/auxiliary/IdGenerator';
+import { isLogValid } from '../common/auxiliary/Validators';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as path from 'path';
-import { LogList } from '../client/src/models/LogList';
+import { LogList } from '../common/models/LogList';
 import { serialize, deserialize } from 'serializer.ts/Serializer';
-import { Log } from '../client/src/models/Log';
+import { Log } from '../common/models/Log';
 
 let app = express()
 const publicPath = path.join(__dirname, '../public')

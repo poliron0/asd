@@ -3,12 +3,12 @@ import LogFormContainer from './log-form/LogFormContainer';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
-import { Paths } from '../auxiliary/Enums';
-import { LogId } from '../auxiliary/Types';
+import { Paths } from '../../../common/auxiliary/Enums';
+import { LogId } from '../../../common/auxiliary/Types';
 import { routerStore } from '../stores/RouterStore';
 import AsyncLogForm from './log-form/index';
 import AsyncLogList from './log-list';
-import { Log } from '../models/Log';
+import { Log } from '../../../common/models/Log';
 
 export interface MainContainerProps {
 }

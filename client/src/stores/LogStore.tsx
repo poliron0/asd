@@ -1,8 +1,8 @@
 import { computed, observable } from 'mobx';
 
-import { LogId } from '../auxiliary/Types';
-import { Log } from '../models/Log';
-import { LogList } from '../models/LogList';
+import { LogId } from '../../../common/auxiliary/Types';
+import { Log } from '../../../common/models/Log';
+import { LogList } from '../../../common/models/LogList';
 import { addLog, fetchAll, fetchLog, removeLog, updateLog } from '../services/LogService';
 
 
