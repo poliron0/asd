@@ -38,8 +38,15 @@ export default class MainContainer extends React.Component<MainContainerProps, M
       }
       case (Paths.NEW_LOG): {
         return <LogFormContainer
-          log={new Log('default', '/default')} 
-          onSaveLog = {(log: Log) => logStore.addLog(log)}/>
+          log={new Log('default', '/default')}
+          onSaveLog={(log: Log) => logStore.addLog(log)} />
+      }
+      default: {
+        return <div>
+          <div>Page Doesn't exist</div>
+          <br />
+          <a href='/'>Go to home page</a>
+        </div >
       }
     }
   }
