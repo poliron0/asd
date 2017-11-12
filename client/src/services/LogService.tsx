@@ -15,7 +15,7 @@ export const addLog = (log: Log): Promise<Log> => {
 
 export const fetchAll = (): Promise<LogList> => {
     return axios.get('/api/log').then(result => 
-        deserialize<LogList>(LogList, result.data)
+        new LogList(deserialize<Log[]>(Log, result.data))
     )
 }
 export const fetchLog = (id: LogId): Promise<Log> => {

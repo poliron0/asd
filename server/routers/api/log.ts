@@ -1,9 +1,9 @@
-import { serialize, deserialize } from 'serializer.ts/Serializer';
 import * as express from 'express';
+import { deserialize } from 'serializer.ts/Serializer';
+
+import IdGenerator from '../../../common/auxiliary/IdGenerator';
 import { isLogValid } from '../../../common/auxiliary/Validators';
 import { Log } from '../../../common/models/Log';
-import IdGenerator from '../../../common/auxiliary/IdGenerator';
-import { LogList } from '../../../common/models/LogList';
 import { LogDb } from '../../db/log';
 
 export let logRouter: express.Router = express.Router()
