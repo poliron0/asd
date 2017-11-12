@@ -22,7 +22,8 @@ export default class AsyncLogForm extends React.Component<AsyncLogFormProps, Asy
     }
 
     render() {
-        return <Async promise={logStore.fetchLog(this.props.logId)}
+        const LogAsync = Async as { new (): Async<Log> }        
+        return <LogAsync promise={logStore.fetchLog(this.props.logId)}
             then={
                 (result: Log) => {
                     console.log(JSON.stringify(result))
