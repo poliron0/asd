@@ -40,6 +40,7 @@ export class LogList {
             throw new Error('Log with id ' + id + ' doesn\'t exist')
         } else {
             this._list[index] = log
+            return log
         }
     }
 

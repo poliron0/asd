@@ -1,36 +1,31 @@
 import { serialize, deserialize } from 'serializer.ts/Serializer';
-import * as express from 'express'
+import * as express from 'express';
 import { isLogValid } from '../../../common/auxiliary/Validators';
 import { Log } from '../../../common/models/Log';
 import IdGenerator from '../../../common/auxiliary/IdGenerator';
 import { LogList } from '../../../common/models/LogList';
-
-let logList: LogList = new LogList([
-    new Log('a', '/a'),
-    new Log('b', '/b'),
-    new Log('c', '/c')
-])
+import { LogDb } from '../../db/log';
 
 export let logRouter: express.Router = express.Router()
 
-logRouter.get('/', (req, res, next) => {
-    res.send(serialize(logList))
+logRouter.get('/', async (req, res, next) => {
+    res.send(await LogDb.getAll())
 })
 
-logRouter.get('/:id', (req, res, next) => {
+logRouter.get('/:id', async (req, res, next) => {
     const id = req.params.id
     try {
-        res.send(serialize(logList.get(id)))
+        res.send(await LogDb.get(id))
     } catch(err) {
         res.status(400).send({err: err.message})
     }
 })
 
-logRouter.delete('/:id', (req, res, next) => {
+logRouter.delete('/:id', async (req, res, next) => {
     const id = req.params.id
     try {
-        let log = logList.get(id)
-        logList.remove(id)
+        let log = await LogDb.get(id)
+        await LogDb.remove(id)
         res.send(serialize(log))
     } catch(err) {
         res.status(400).send({err: err.message})
@@ -43,9 +38,10 @@ logRouter.put('/', (req, res, next) => {
         res.status(400).send({err: 'Invalid log'})
     } else {
         try {
-            logList.update(log.id, log)
+            LogDb.update(log)
             res.send(log)
-        } catch(err) {
+        } 
+        catch(err) {
             res.status(400).send({err: err.message})
         }
     }   
@@ -58,7 +54,7 @@ logRouter.post('/', (req, res, next) => {
     } else {
         //Don't trust the client - put your own id
         log.id = IdGenerator.generateId()
-        logList.add(log)
+        LogDb.add(log)
         res.send(log)
     }
 })
