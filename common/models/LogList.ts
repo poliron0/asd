@@ -13,18 +13,18 @@ export class LogList {
         this._list = list
     }
 
-    remove(id: LogId) {
+    remove(id: LogId): Log {
         let index = this._list.findIndex(log => log.id == id)
         if (index < 0) {
             throw new Error('Log with id ' + id + ' doesn\'t exist')
         } else {
-            let log: Log = this._list[0]
+            let log: Log = this._list[index]
             this._list = this._list.filter(log => log.id != id)
             return log
         }
     }
 
-    add(log: Log) {
+    add(log: Log): Log {
         let index = this._list.findIndex(item => item.id == log.id)
         if (index > 0) {
             throw new Error('Log with id ' + log.id + ' already exists')
@@ -34,13 +34,13 @@ export class LogList {
         }
     }
 
-    update(id: LogId, log: Log) {
+    update(id: LogId, log: Log): Log {
         let index = this._list.findIndex(log => log.id == id)
         if (index < 0) {
             throw new Error('Log with id ' + id + ' doesn\'t exist')
         } else {
             this._list[index] = log
-            return log
+            return this._list[index]
         }
     }
 

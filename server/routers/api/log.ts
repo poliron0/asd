@@ -24,22 +24,19 @@ logRouter.get('/:id', async (req, res, next) => {
 logRouter.delete('/:id', async (req, res, next) => {
     const id = req.params.id
     try {
-        let log = await LogDb.get(id)
-        await LogDb.remove(id)
-        res.send(serialize(log))
+        res.send(await LogDb.remove(id))
     } catch(err) {
         res.status(400).send({err: err.message})
     }
 })
 
-logRouter.put('/', (req, res, next) => {
+logRouter.put('/', async (req, res, next) => {
     const log:Log = deserialize<Log>(Log, req.body.log)
     if(!isLogValid(log)) {
         res.status(400).send({err: 'Invalid log'})
     } else {
         try {
-            LogDb.update(log)
-            res.send(log)
+            res.send(await LogDb.update(log))
         } 
         catch(err) {
             res.status(400).send({err: err.message})
@@ -47,14 +44,13 @@ logRouter.put('/', (req, res, next) => {
     }   
 })
 
-logRouter.post('/', (req, res, next) => {
+logRouter.post('/', async (req, res, next) => {
     const log:Log = deserialize<Log>(Log, req.body.log)
     if(!isLogValid(log)) {
         res.status(400).send({err: 'Invalid log'})
     } else {
         //Don't trust the client - put your own id
         log.id = IdGenerator.generateId()
-        LogDb.add(log)
-        res.send(log)
+        res.send(await LogDb.add(log))
     }
 })
