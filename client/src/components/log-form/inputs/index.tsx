@@ -1,12 +1,11 @@
-import { Log } from '../../../../../common/models/Log';
+import { FormControl, FormGroup } from 'material-ui';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
-import { isLocationValid, isNameValid } from '../../../../../common/auxiliary/Validators';
-import InputError from './InputError';
+import { Log } from '../../../../../common/models/Log';
 import LocationInput from './LocationInput';
 import NameInput from './NameInput';
-import { logStore } from '../../../stores/LogStore';
+import { isNameValid, isLocationValid } from '../../../../../common/auxiliary/Validators';
 
 export interface InputsContainerProps {
     log: Log
@@ -23,30 +22,33 @@ export default class InputsContainer extends React.Component<InputsContainerProp
 
     render() {
 
-        const log = this.props.log 
+        const log = this.props.log
 
         const nameInput = <NameInput
             name={log.name}
             onSetName={(name: string) => {
                 log.name = name
-            }} />
+            }}
+            isValid={isNameValid(log.name)}
+            errorMessage={'Invalid name - name should contain only english letters'}
+        />
 
         const locationInput = <LocationInput
             location={log.location}
             onSetLocation={(location: string) => {
                 log.location = location
-            }} />
+            }}
+            isValid={isLocationValid(log.location)}
+            errorMessage={'Invalid name - name should contain only english letters'}
+        />
 
         return (
-            <div>
-                Name: {nameInput}
-                {isNameValid(log.name) ? <span></span> : <InputError
-                    errorMessage={'Invalid name - name should contain only english letters'} />}
-                <br />
-                Location: {locationInput}
-                {isLocationValid(log.location) ? <span></span> : <InputError
-                    errorMessage={'Please enter a valid linux or windows file path'} />}
-            </div>
+            <FormControl>
+                <FormGroup>
+                    {nameInput}
+                    {locationInput}
+                </FormGroup>
+            </FormControl>
         );
     }
 }

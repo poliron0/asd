@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Button } from 'material-ui';
 
 export interface SaveButtonProps {
     onSave(): void
@@ -13,13 +14,13 @@ export default class SaveButton extends React.Component<SaveButtonProps, SaveBut
 
     render() {
         return (
-            <button
+            <Button raised color='primary'
                 disabled={this.props.disabled}
                 onClick={() => {
                     this.props.onSave()
                 }}>
                 Save
-            </button>
+            </Button>
         );
     }
 }

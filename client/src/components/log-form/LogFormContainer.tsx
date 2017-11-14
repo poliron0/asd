@@ -9,6 +9,7 @@ import InputsContainer from './inputs/index';
 import RegexListContainer from './regex-list/index';
 import SaveButton from './save-button/index';
 import SelectorsContainer from './selectors/index';
+import { Grid, Card, CardActions, Button, Typography, CardContent } from 'material-ui';
 
 export interface LogFormContainerProps {
     log: Log
@@ -90,18 +91,30 @@ export default class LogFormContainer extends React.Component<LogFormContainerPr
 
         let message = <span>{this.state.message}</span>
 
-        return (
-            <div>
+        const cardContent = <CardContent>
+            <Typography type='body1'>
                 {backToSummaryLink}
                 {instructions}
                 {selectors}
                 {inputs}
-                <br />
                 {regexList}
-                {saveButton}
-                <br/>
-                {message}
-            </div>
+            </Typography>
+        </CardContent>
+
+        const cardActions = <CardActions>
+            {saveButton}
+        </CardActions>
+
+        return (
+            <Grid container justify='center' direction='column' alignItems='center'>
+                <Grid item>
+                    <Card>
+                        {cardContent}
+                        {cardActions}
+                        {message}
+                    </Card>
+                </Grid>
+            </Grid>
         );
     }
 }

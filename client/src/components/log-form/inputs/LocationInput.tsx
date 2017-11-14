@@ -1,7 +1,10 @@
 import * as React from 'react';
+import { TextField } from 'material-ui';
 
 export interface LocationInputProps {
     location: string
+    isValid: boolean
+    errorMessage: string
     onSetLocation(location: string): void
 }
 
@@ -20,11 +23,14 @@ export default class LocationInput extends React.Component<LocationInputProps, L
 
     render() {
         return (
-            <div>
-                <input type="text"
-                    value={this.props.location}
-                    onChange={this.onSetLocation.bind(this)} />
-            </div>
+            <TextField
+                margin='normal'
+                error={!this.props.isValid}
+                label="Location"
+                value={this.props.location}
+                onChange={this.onSetLocation.bind(this)}
+                helperText={this.props.isValid ? '' : this.props.errorMessage}
+            />
         );
     }
 }
