@@ -92,13 +92,10 @@ export default class LogFormContainer extends React.Component<LogFormContainerPr
         let message = <span>{this.state.message}</span>
 
         const cardContent = <CardContent>
-            <Typography type='body1'>
                 {backToSummaryLink}
-                {instructions}
                 {selectors}
                 {inputs}
                 {regexList}
-            </Typography>
         </CardContent>
 
         const cardActions = <CardActions>

@@ -24,11 +24,6 @@ export default class NameInput extends React.Component<NameInputProps, NameInput
 
     render() {
         return (
-            // <div>
-            //     <input type="text"
-            //         value={this.props.name}
-            //         onChange={this.onSetName.bind(this)} />
-            // </div>
 
             <TextField
                 margin='normal'
