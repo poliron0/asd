@@ -51,19 +51,14 @@ export default class LogFormContainer extends React.Component<LogFormContainerPr
 
         let log: Log = this.props.log
 
-        const instructions =
-            <div>
-                <b>Please fill out the form by the following rules:</b>
-                <ol>
-                    <li>Valid log name should contain only english letters</li>
-                    <li>Valid log location should be a valid linux/windows file path</li>
-                    <li>Each regular expression should be a valid javascript regular expression string</li>
-                </ol>
-            </div>
-        const backToSummaryLink =
-            <a href={'#'} onClick={(event) => {
+        const backToSummaryLink = <Button
+            raised
+            color='primary'
+            onClick={(event) => {
                 routerStore.goTo(Paths.VIEW)
-            }}>Back to Summary</a>
+            }}>
+            Back to logs list
+        </Button>
 
 
         const selectors = <SelectorsContainer
@@ -84,18 +79,19 @@ export default class LogFormContainer extends React.Component<LogFormContainerPr
         const regexList = <RegexListContainer
             regexList={log.regexList} />
 
-        const saveButton =
-            <SaveButton
-                disabled={!isLogValid(log)}
-                onSave={() => this.saveLog()} />
+        const saveButton = <SaveButton
+            disabled={!isLogValid(log)}
+            onSave={() => this.saveLog()} />
 
         let message = <span>{this.state.message}</span>
 
         const cardContent = <CardContent>
-                {backToSummaryLink}
-                {selectors}
-                {inputs}
-                {regexList}
+            <Typography type='headline' component='h2'>
+                Log edit form
+            </Typography>
+            {selectors}
+            {inputs}
+            {regexList}
         </CardContent>
 
         const cardActions = <CardActions>
@@ -104,6 +100,9 @@ export default class LogFormContainer extends React.Component<LogFormContainerPr
 
         return (
             <Grid container justify='center' direction='column' alignItems='center'>
+                <Grid item>
+                    {backToSummaryLink}
+                </Grid>
                 <Grid item>
                     <Card>
                         {cardContent}

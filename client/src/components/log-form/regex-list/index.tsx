@@ -1,18 +1,13 @@
-import ListItemIcon from 'material-ui/List/ListItemIcon';
-import ListItem from 'material-ui/List/ListItem';
-import List from 'material-ui/List';
+import { Button, Card, CardActions, CardContent, FormControl, FormGroup, FormLabel, Grid } from 'material-ui';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
 import { LogRegexId } from '../../../../../common/auxiliary/Types';
 import { isRegexValid } from '../../../../../common/auxiliary/Validators';
-import InputError from '../inputs/InputError';
-import RegexInput from '../inputs/RegexInput';
-import RegexTester from '../inputs/RegexTester';
 import { LogRegex } from '../../../../../common/models/LogRegex';
 import { RegexList } from '../../../../../common/models/RegexList';
-import TextFormat from 'material-ui-icons/TextFormat';
-import { FormControl, FormGroup, FormLabel, Card, CardContent, Button, CardActions } from 'material-ui';
+import RegexInput from '../inputs/RegexInput';
+import RegexTester from '../inputs/RegexTester';
 
 export interface RegexListContainerProps {
     regexList: RegexList
@@ -52,25 +47,29 @@ export default class RegexListContainer extends React.Component<RegexListContain
                 onClick={(event) => {
                     this.onAddRegex(new LogRegex(''))
                 }}>
-                 Add expression
+                Add expression
             </Button>
 
 
-        const inputs = <FormGroup>
+        const inputs = <FormGroup >
             <FormLabel>
                 Regular Expressions
             </FormLabel>
             {this.props.regexList.getAll().map(logRegex =>
-                <FormControl >
-                    <RegexInput
-                        key={logRegex.id}
-                        isValid={isRegexValid(logRegex.exp)}
-                        errorMessage={'Please enter a valid javascript regex!'}
-                        regexString={logRegex.exp}
-                        onRemoveRegex={() => this.onRemoveRegex(logRegex.id)}
-                        onChangeRegexString={(regexString: string) => this.onChangeRegexString(logRegex.id, regexString)} />
+                <Grid key={logRegex.id} container direction='column' justify='flex-start' alignItems='flex-start'>
+                    <Grid item>
+                        <RegexInput
+                            
+                            isValid={isRegexValid(logRegex.exp)}
+                            errorMessage={'Please enter a valid javascript regex!'}
+                            regexString={logRegex.exp}
+                            onRemoveRegex={() => this.onRemoveRegex(logRegex.id)}
+                            onChangeRegexString={(regexString: string) => this.onChangeRegexString(logRegex.id, regexString)} />
+                    </Grid>
+                    <Grid item>
                         {isRegexValid(logRegex.exp) ? <RegexTester regexString={logRegex.exp} /> : ''}
-                </FormControl>
+                    </Grid>
+                </Grid>
             )}
         </FormGroup>
 

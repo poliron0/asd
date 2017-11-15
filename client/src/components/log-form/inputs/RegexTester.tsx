@@ -59,8 +59,7 @@ export default class RegexTester extends React.Component<RegexTesterProps, Regex
                     </a>
                 </div>
 
-
-                {this.state.isOpen ? <span>{textBox} {isValidText}</span> : ''}
+                {this.state.isOpen ? <div>{textBox} <br/> {isValidText}</div> : ''}
 
             </div>
         );
