@@ -4,6 +4,7 @@ import * as React from 'react';
 import RotatingTypeSelector from './RotatingTypeSelector';
 import SpecialTypeSelector from './SpecialTypeSelector';
 import { Log } from '../../../../../common/models/Log';
+import {FormGroup} from 'material-ui';
 
 export interface SelectorsContainerProps {
     log: Log
@@ -29,12 +30,10 @@ export default class SelectorsContainer extends React.Component<SelectorsContain
             onSetRotating={this.props.onSetRotating} />
 
         return (
-            <span>
-                Does the log contain special line?
+            <FormGroup>
                 {specialTypeSelector}
-                Is the log rotating?
                 {rotatingTypeSelector}
-            </span>
+            </FormGroup>
         );
     }
 }

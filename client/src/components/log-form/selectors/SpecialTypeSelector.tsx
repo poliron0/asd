@@ -1,4 +1,6 @@
+import Switch from 'material-ui/Switch';
 import * as React from 'react';
+import { FormControlLabel } from 'material-ui';
 
 export interface SpecialTypeSelectorProps {
     onSetSpecial(isSpecial: boolean): void
@@ -16,17 +18,14 @@ export default class SpecialTypeSelector extends React.Component<SpecialTypeSele
 
     render() {
         return (
-            <div>
-                <input type="radio"
-                    name="isSpecialLineLog"
-                    checked={!this.props.isSpecial}
-                    onChange={() => this.props.onSetSpecial(false)} /> no
-
-                <input type="radio"
-                    name="isSpecialLineLog"
+            <FormControlLabel
+                control={<Switch
                     checked={this.props.isSpecial}
-                    onChange={() => this.props.onSetSpecial(true)} /> yes
-            </div>
+                    onChange={(event) => this.props.onSetSpecial(!this.props.isSpecial)}
+                />}
+                label="Does the log contain special line?"
+            />
+
         );
     }
 }

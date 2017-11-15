@@ -30,7 +30,7 @@ export default class InputsContainer extends React.Component<InputsContainerProp
                 log.name = name
             }}
             isValid={isNameValid(log.name)}
-            errorMessage={'Invalid name - name should contain only english letters'}
+            errorMessage={'Name should contain only english letters'}
         />
 
         const locationInput = <LocationInput
@@ -39,7 +39,7 @@ export default class InputsContainer extends React.Component<InputsContainerProp
                 log.location = location
             }}
             isValid={isLocationValid(log.location)}
-            errorMessage={'Invalid name - name should contain only english letters'}
+            errorMessage={'Location should be a valid linux/windows path'}
         />
 
         return (

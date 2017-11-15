@@ -1,3 +1,5 @@
+import {FormControlLabel} from 'material-ui';
+import Switch from 'material-ui/Switch';
 import * as React from 'react';
 
 export interface RotatingTypeSelectorProps {
@@ -14,18 +16,16 @@ export default class RotatingTypeSelector extends React.Component<RotatingTypeSe
   }
 
   render() {
+    
     return (
-      <div>
-        <input type="radio"
-          name="isRotatingLog"
-          checked={!this.props.isRotating}
-          onChange={() => this.props.onSetRotating(false)} /> no
-
-        <input type="radio"
-          name="isRotatingLog"
+      <FormControlLabel
+        control={<Switch
           checked={this.props.isRotating}
-          onChange={() => this.props.onSetRotating(true)} /> yes
-      </div>
+          onChange={(event) => this.props.onSetRotating(!this.props.isRotating)}
+        />}
+        label="Is the log rotating?"
+      />
+
     );
   }
 }
