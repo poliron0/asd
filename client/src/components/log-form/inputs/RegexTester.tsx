@@ -52,9 +52,12 @@ export default class RegexTester extends React.Component<RegexTesterProps, Regex
             <span style={{ color: 'red' }}>No match</span>
 
         return (
-            <div>
+            <div >
                 <div>
-                    <a href='#' onClick={this.onChangeVisibility.bind(this)}>
+                    <a href='#' onClick={(event) => {
+                        event.preventDefault()
+                        this.onChangeVisibility()
+                    }}>
                         {this.state.isOpen ? 'Close tester' : 'Open tester'}
                     </a>
                 </div>
