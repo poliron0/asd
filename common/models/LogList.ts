@@ -52,6 +52,16 @@ export class LogList {
         return this._list[index]
     }
 
+    set(id: LogId, log: Log): Log {
+        let index: number = this._list.findIndex(log => log.id === id)
+        if(index > 0) {
+            //Remove the log if already exists
+            this.remove(id)
+        }
+        
+        return this.add(log)
+    }
+
     getAll(): Array<Log> {
         return this._list
     }

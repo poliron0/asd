@@ -34,7 +34,10 @@ class LogStore {
     }
 
     fetchLog(id: LogId): Promise<Log> {
-        return fetchLog(id)
+        return fetchLog(id).then(result => {
+            this._logList.set(id, result)
+            return result
+        })
     }
 
     updateLog(log: Log): Promise<Log> {
