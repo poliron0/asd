@@ -1,15 +1,15 @@
+import { Button, Card, CardActions, CardContent, Grid, Typography } from 'material-ui';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
-import { Paths } from '../../../../common/auxiliary/Enums';
-import { isLogValid } from '../../../../common/auxiliary/Validators';
-import { Log } from '../../../../common/models/Log';
-import { routerStore } from '../../stores/RouterStore';
-import InputsContainer from './inputs/index';
-import RegexListContainer from './regex-list/index';
-import SaveButton from './save-button/index';
-import SelectorsContainer from './selectors/index';
-import { Grid, Card, CardActions, Button, Typography, CardContent } from 'material-ui';
+import { Paths } from '../../../../../common/auxiliary/Enums';
+import { isLogValid } from '../../../../../common/auxiliary/Validators';
+import { Log } from '../../../../../common/models/Log';
+import { routerStore } from '../../../stores/RouterStore';
+import InputsContainer from '../inputs/index';
+import RegexListContainer from '../regex-list/index';
+import SaveButton from '../save-button/index';
+import SelectorsContainer from '../selectors/index';
 
 export interface LogFormContainerProps {
     log: Log

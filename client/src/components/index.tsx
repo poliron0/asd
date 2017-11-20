@@ -1,5 +1,5 @@
 import { logStore } from '../stores/LogStore';
-import LogFormContainer from './log-form/LogFormContainer';
+import LogFormContainer from './log-form/container/index';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 

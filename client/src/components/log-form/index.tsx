@@ -5,7 +5,7 @@ import Async from 'react-promise';
 import { LogId } from '../../../../common/auxiliary/Types';
 import { Log } from '../../../../common/models/Log';
 import { logStore } from '../../stores/LogStore';
-import LogFormContainer from './LogFormContainer';
+import LogFormContainer from './container/index';
 
 interface AsyncLogFormProps {
     logId: LogId
